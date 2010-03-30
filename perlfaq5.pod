@@ -23,12 +23,12 @@ Instead of seeing a dot for every line, Perl buffers the output and you
 have a long wait before you see a row of 50 dots all at once:
 
 	# long wait, then row of dots all at once
-	while( <> ) {
-		print ".";
-		print "\n" unless ++$count % 50;
+	while ( <> ) {
+	    print ".";
+	    print "\n" unless ++$count % 50;
 
-		#... expensive line processing operations
-		}
+	    #... expensive line processing operations
+	}
 
 To get around this, you have to unbuffer the output filehandle, in this
 case, C<STDOUT>. You can set the special variable C<$|> to a true value
@@ -37,12 +37,12 @@ case, C<STDOUT>. You can set the special variable C<$|> to a true value
 	$|++;
 
 	# dot shown immediately
-	while( <> ) {
-		print ".";
-		print "\n" unless ++$count % 50;
+	while ( <> ) {
+	    print ".";
+	    print "\n" unless ++$count % 50;
 
-		#... expensive line processing operations
-		}
+	    #... expensive line processing operations
+	}
 
 The C<$|> is one of the per-filehandle special variables, so each
 filehandle has its own copy of its value. If you want to merge
@@ -50,32 +50,34 @@ standard output and standard error for instance, you have to unbuffer
 each (although STDERR might be unbuffered by default):
 
 	{
-	my $previous_default = select(STDOUT);  # save previous default
-	$|++;                                   # autoflush STDOUT
-	select(STDERR);
-	$|++;                                   # autoflush STDERR, to be sure
-	select($previous_default);              # restore previous default
+	    my $previous_default = select(STDOUT);  # save previous default
+	    $|++;                                   # autoflush STDOUT
+
+	    select(STDERR);
+	    $|++;                                   # autoflush STDERR, to be sure
+
+	    select($previous_default);              # restore previous default
 	}
 
 	# now should alternate . and +
-	while( 1 )
-		{
-		sleep 1;
-		print STDOUT ".";
-		print STDERR "+";
-		print STDOUT "\n" unless ++$count % 25;
-		}
+	while ( 1 )
+	{
+	    sleep 1;
+	    print STDOUT ".";
+	    print STDERR "+";
+	    print STDOUT "\n" unless ++$count % 25;
+	}
 
 Besides the C<$|> special variable, you can use C<binmode> to give
 your filehandle a C<:unix> layer, which is unbuffered:
 
 	binmode( STDOUT, ":unix" );
 
-	while( 1 ) {
-		sleep 1;
-		print ".";
-		print "\n" unless ++$count % 50;
-		}
+	while ( 1 ) {
+	    sleep 1;
+	    print ".";
+	    print "\n" unless ++$count % 50;
+	}
 
 For more information on output layers, see the entries for C<binmode>
 and C<open> in L<perlfunc>, and the C<PerlIO> module documentation.
@@ -111,10 +113,10 @@ file, printing its lines, then closing the file:
 	open my $in,  '<',  $file      or die "Can't read old file: $!";
 	open my $out, '>', "$file.new" or die "Can't write new file: $!";
 
-	while( <$in> )
-		{
-		print $out $_;
-		}
+	while ( <$in> )
+	{
+	    print $out $_;
+	}
 
    close $out;
 
@@ -129,10 +131,10 @@ the loop that prints the existing lines.
 
 	print $out "# Add this line to the top\n"; # <--- HERE'S THE MAGIC
 
-	while( <$in> )
-		{
-		print $out $_;
-		}
+	while ( <$in> )
+	{
+	    print $out $_;
+	}
 
    close $out;
 
@@ -146,54 +148,54 @@ be sure that you're supposed to do that on every line!
 
 	print $out "# Add this line to the top\n";
 
-	while( <$in> )
-		{
-		s/\b(perl)\b/Perl/g;
-		print $out $_;
-		}
+	while ( <$in> )
+	{
+	    s/\b(perl)\b/Perl/g;
+	    print $out $_;
+	}
 
-   close $out;
+	close $out;
 
 To change only a particular line, the input line number, C<$.>, is
 useful. First read and print the lines up to the one you  want to
 change. Next, read the single line you want to change, change it, and
 print it. After that, read the rest of the lines and print those:
 
-	while( <$in> )   # print the lines before the change
-		{
-		print $out $_;
-		last if $. == 4; # line number before change
-		}
+	while ( <$in> )   # print the lines before the change
+	{
+	    print $out $_;
+	    last if $. == 4; # line number before change
+	}
 
 	my $line = <$in>;
 	$line =~ s/\b(perl)\b/Perl/g;
 	print $out $line;
 
-	while( <$in> )   # print the rest of the lines
-		{
-		print $out $_;
-		}
+	while ( <$in> )   # print the rest of the lines
+	{
+	    print $out $_;
+	}
 
 To skip lines, use the looping controls. The C<next> in this example
 skips comment lines, and the C<last> stops all processing once it
 encounters either C<__END__> or C<__DATA__>.
 
-	while( <$in> )
-		{
-		next if /^\s+#/;             # skip comment lines
-		last if /^__(END|DATA)__$/;  # stop at end of code marker
-		print $out $_;
-		}
+	while ( <$in> )
+	{
+	    next if /^\s+#/;             # skip comment lines
+	    last if /^__(END|DATA)__$/;  # stop at end of code marker
+	    print $out $_;
+	}
 
 Do the same sort of thing to delete a particular line by using C<next>
 to skip the lines you don't want to show up in the output. This
 example skips every fifth line:
 
-	while( <$in> )
-		{
-		next unless $. % 5;
-		print $out $_;
-		}
+	while ( <$in> )
+	{
+	    next unless $. % 5;
+	    print $out $_;
+	}
 
 If, for some odd reason, you really want to see the whole file at once
 rather than processing line-by-line, you can slurp it in (as long as
@@ -204,7 +206,7 @@ you can fit the whole thing in memory!):
 
 	my @lines = do { local $/; <$in> }; # slurp!
 
-		# do your magic here
+	# do your magic here
 
 	print $out @lines;
 
@@ -267,13 +269,13 @@ Conceptually, the easiest way to count the lines in a file is to
 simply read them and count them:
 
 	my $count = 0;
-	while( <$fh> ) { $count++; }
+	while ( <$fh> ) { $count++; }
 
 You don't really have to count them yourself, though, since Perl
 already does that with the C<$.> variable, which is the current line
 number from the last filehandle read:
 
-	1 while( <$fh> );
+	1 while ( <$fh> );
 	my $count = $.;
 
 If you want to use C<$.>, you can reduce it to a simple one-liner,
@@ -288,10 +290,12 @@ you, you might just read chunks of data and count the number of
 newlines:
 
 	my $lines = 0;
-	open my($fh), '<:raw', $filename or die "Can't open $filename: $!";
-	while( sysread $fh, $buffer, 4096 ) {
-		$lines += ( $buffer =~ tr/\n// );
-		}
+	open my($fh), '<:raw', $filename   or die "Can't open $filename: $!";
+
+	while ( sysread $fh, $buffer, 4096 ) {
+	    $lines += ( $buffer =~ tr/\n// );
+	}
+
 	close FILE;
 
 However, that doesn't work if the line ending isn't a newline. You
@@ -299,10 +303,12 @@ might change that C<tr///> to a C<s///> so you can count the number of
 times the input record separator, C<$/>, shows up:
 
 	my $lines = 0;
-	open my($fh), '<:raw', $filename or die "Can't open $filename: $!";
-	while( sysread $fh, $buffer, 4096 ) {
-		$lines += ( $buffer =~ s|$/||g; );
-		}
+	open my($fh), '<:raw', $filename   or die "Can't open $filename: $!";
+
+	while ( sysread $fh, $buffer, 4096 ) {
+	    $lines += ( $buffer =~ s|$/||g; );
+	}
+
 	close FILE;
 
 If you don't mind shelling out, the C<wc> command is usually the
@@ -310,51 +316,52 @@ fastest, even with the extra interprocess overhead. Ensure that you
 have an untainted filename though:
 
 	#!perl -T
-	
+
 	$ENV{PATH} = undef;
-	
+
 	my $lines;
-	if( $filename =~ /^([0-9a-z_.]+)\z/ ) {
-		$lines = `/usr/bin/wc -l $1`
-		chomp $lines;
-		}
+
+	if ( $filename =~ /^([0-9a-z_.]+)\z/ ) {
+	    $lines = `/usr/bin/wc -l $1`
+	    chomp $lines;
+	}
 
 =head2 How do I delete the last N lines from a file?
 X<lines> X<file>
 
 (contributed by brian d foy)
 
-The easiest conceptual solution is to count the lines in the 
+The easiest conceptual solution is to count the lines in the
 file then start at the beginning and print the number of lines
 (minus the last N) to a new file.
 
 Most often, the real question is how you can delete the last N
-lines without making more than one pass over the file, or how to 
+lines without making more than one pass over the file, or how to
 do it with a lot of copying. The easy concept is the hard reality when
 you might have millions of lines in your file.
 
-One trick is to use C<File::ReadBackwards>, which starts at the end of 
+One trick is to use C<File::ReadBackwards>, which starts at the end of
 the file. That module provides an object that wraps the real filehandle
-to make it easy for you to move around the file. Once you get to the 
+to make it easy for you to move around the file. Once you get to the
 spot you need, you can get the actual filehandle and work with it as
 normal. In this case, you get the file position at the end of the last
 line you want to keep and truncate the file to that point:
 
 	use File::ReadBackwards;
-	
+
 	my $filename = 'test.txt';
 	my $Lines_to_truncate = 2;
 
-	my $bw = File::ReadBackwards->new( $filename ) 
+	my $bw = File::ReadBackwards->new( $filename )
 		or die "Could not read backwards in [$filename]: $!";
-	
+
 	my $lines_from_end = 0;
-	until( $bw->eof or $lines_from_end == $Lines_to_truncate ) 
-		{
-		print "Got: ", $bw->readline;
-		$lines_from_end++;
-		}
-	
+	until( $bw->eof or $lines_from_end == $Lines_to_truncate )
+	{
+	    print "Got: ", $bw->readline;
+	    $lines_from_end++;
+	}
+
 	truncate( $filename, $bw->tell );
 
 The C<File::ReadBackwards> module also has the advantage of setting
@@ -362,7 +369,7 @@ the input record separator to a regular expression.
 
 You can also use the C<Tie::File> module which lets you access
 the lines through a tied array. You can use normal array operations
-to modify your file, including setting the last index and using 
+to modify your file, including setting the last index and using
 C<splice>.
 
 =head2 How can I use Perl's C<-i> option from within a program?
@@ -375,15 +382,17 @@ behavior within a larger program. For example:
 
 	# ...
 	{
-	local($^I, @ARGV) = ('.orig', glob("*.c"));
-	while (<>) {
+	    local($^I, @ARGV) = ('.orig', glob("*.c"));
+
+	    while ( <> ) {
 		if ($. == 1) {
-			print "This line should appear at the top of each file\n";
+		    print "This line should appear at the top of each file\n";
 		}
+
 		s/\b(p)earl\b/${1}erl/i;        # Correct typos, preserving case
 		print;
 		close ARGV if eof;              # Reset $.
-		}
+	    }
 	}
 	# $^I and @ARGV return to their old values here
 
@@ -443,26 +452,28 @@ process ID and/or the current time-value. If you need to have many
 temporary files in one process, use a counter:
 
 	BEGIN {
-	use Fcntl;
-	my $temp_dir = -d '/tmp' ? '/tmp' : $ENV{TMPDIR} || $ENV{TEMP};
-	my $base_name = sprintf "%s/%d-%d-0000", $temp_dir, $$, time;
+	    use Fcntl;
 
-	sub temp_file {
+	    my $temp_dir  = -d '/tmp' ? '/tmp' : $ENV{TMPDIR} || $ENV{TEMP};
+	    my $base_name = sprintf "%s/%d-%d-0000", $temp_dir, $$, time;
+
+	    sub temp_file {
 		local *FH;
 		my $count = 0;
-		until( defined(fileno(FH)) || $count++ > 100 ) {
-			$base_name =~ s/-(\d+)$/"-" . (1 + $1)/e;
-			# O_EXCL is required for security reasons.
-			sysopen my($fh), $base_name, O_WRONLY|O_EXCL|O_CREAT;
-			}
 
-		if( defined fileno($fh) ) {
-			return ($fh, $base_name);
-			}
-		else {
-			return ();
-			}
+		until( defined(fileno(FH)) || $count++ > 100 ) {
+		    $base_name =~ s/-(\d+)$/"-" . (1 + $1)/e;
+		    # O_EXCL is required for security reasons.
+		    sysopen my($fh), $base_name, O_WRONLY|O_EXCL|O_CREAT;
 		}
+
+		if ( defined fileno($fh) ) {
+		    return ($fh, $base_name);
+		}
+		else {
+		    return ();
+		}
+	    }
 
 	}
 
@@ -481,16 +492,20 @@ Berkeley-style ps:
 	# sample input line:
 	#   15158 p5  T      0:00 perl /home/tchrist/scripts/now-what
 	my $PS_T = 'A6 A4 A7 A5 A*';
+
 	open my $ps, '-|', 'ps';
 	print scalar <$ps>;
 	my @fields = qw( pid tt stat time command );
+
 	while (<$ps>) {
-		my %process;
-		@process{@fields} = unpack($PS_T, $_);
-	for my $field ( @fields ) {
+            my %process;
+            @process{@fields} = unpack($PS_T, $_);
+
+	    for my $field ( @fields ) {
 		print "$field: <$process{$field}>\n";
-	}
-	print 'line=', pack($PS_T, @process{@fields} ), "\n";
+	    }
+
+	    print 'line=', pack($PS_T, @process{@fields} ), "\n";
 	}
 
 We've used a hash slice in order to easily handle the fields of each row.
@@ -522,9 +537,9 @@ the filehandle reference is a simple scalar.
 
 	my @fhs = ( $fh1, $fh2, $fh3 );
 
-	for( $i = 0; $i <= $#fhs; $i++ ) {
-		print {$fhs[$i]} "just another Perl answer, \n";
-		}
+	for ( $i = 0; $i <= $#fhs; $i++ ) {
+	    print {$fhs[$i]} "just another Perl answer, \n";
+	}
 
 Before perl5.6, you had to deal with various typeglob idioms
 which you may see in older code.
@@ -568,6 +583,7 @@ or a scalar variable containing one:
 
 	($ifh, $ofh, $efh) = (*STDIN, *STDOUT, *STDERR);
 	print $ofh "Type it: ";
+
 	my $got = <$ifh>
 	print $efh "What was that: $got";
 
@@ -575,15 +591,15 @@ If you're passing a filehandle to a function, you can write
 the function in two ways:
 
 	sub accept_fh {
-		my $fh = shift;
-		print $fh "Sending to indirect filehandle\n";
+	    my $fh = shift;
+	    print $fh "Sending to indirect filehandle\n";
 	}
 
 Or it can localize a typeglob and use the filehandle directly:
 
 	sub accept_fh {
-		local *FH = shift;
-		print  FH "Sending to localized filehandle\n";
+	    local *FH = shift;
+	    print  FH "Sending to localized filehandle\n";
 	}
 
 Both styles work with either objects or typeglobs of real filehandles.
@@ -657,10 +673,10 @@ This file handle can then be used to read from or write to the string:
 
 	open(my $fh, '>', \$string) or die "Could not open string for writing";
 	print $fh "foo\n";
-	print $fh "bar\n";	# $string now contains "foo\nbar\n"
+	print $fh "bar\n";      # $string now contains "foo\nbar\n"
 
 	open(my $fh, '<', \$string) or die "Could not open string for reading";
-	my $x = <$fh>;	# $x now contains "foo\n"
+	my $x = <$fh>;  # $x now contains "foo\n"
 
 With older versions of Perl, the C<IO::String> module provides similar
 functionality.
@@ -678,10 +694,10 @@ really).
 This subroutine will add commas to your number:
 
 	sub commify {
-		local $_  = shift;
-		1 while s/^([-+]?\d+)(\d{3})/$1,$2/;
-		return $_;
-		}
+	    local $_  = shift;
+	    1 while s/^([-+]?\d+)(\d{3})/$1,$2/;
+	    return $_;
+	}
 
 This regex from Benjamin Goldberg will add commas to numbers:
 
@@ -716,7 +732,7 @@ Within Perl, you may use this directly:
 	  ^ ~             # find a leading tilde
 	  (               # save this in $1
 	      [^/]        # a non-slash character
-	            *     # repeated 0 or more times (0 means me)
+		    *     # repeated 0 or more times (0 means me)
 	  )
 	}{
 	  $1
@@ -818,7 +834,7 @@ X<glob>
 (contributed by brian d foy)
 
 Starting with Perl 5.6.0, C<glob> is implemented internally rather
-than relying on an external resource. As such, memory issues with 
+than relying on an external resource. As such, memory issues with
 C<glob> aren't a problem in modern perls.
 
 =head2 How can I open a file with a leading ">" or trailing blanks?
@@ -905,7 +921,7 @@ X<lock, lockfile race condition>
 
 A common bit of code B<NOT TO USE> is this:
 
-	sleep(3) while -e 'file.lock';	# PLEASE DO NOT USE
+	sleep(3) while -e 'file.lock';   # PLEASE DO NOT USE
 	open my $lock, '>', 'file.lock'; # THIS BROKEN CODE
 
 This is a classic race condition: you take two steps to do something
@@ -1025,6 +1041,7 @@ If you prefer something more legible, use the File::stat module
 	# error checking left as an exercise for reader.
 	use File::stat;
 	use Time::localtime;
+
 	my $date_string = ctime(stat($file)->mtime);
 	print "file $file updated at $date_string\n";
 
@@ -1041,8 +1058,9 @@ read and write times from its first argument to all the rest
 of them.
 
 	if (@ARGV < 2) {
-		die "usage: cptimes timestamp_file other_files ...\n";
-		}
+	    die "usage: cptimes timestamp_file other_files ...\n";
+	}
+
 	my $timestamp = shift;
 	my($atime, $mtime) = (stat($timestamp))[8,9];
 	utime $atime, $mtime, @ARGV;
@@ -1077,7 +1095,7 @@ If you mmap the file, you can virtually load the entire file into a
 string without actually storing it in memory:
 
 	use File::Map qw(map_file);
-	
+
 	map_file my $string, $filename;
 
 Once mapped, you can treat C<$string> as you would any other string.
@@ -1096,10 +1114,12 @@ The customary Perl approach for processing all the lines in a file is to
 do so one line at a time:
 
 	open my $input, '<', $file or die "can't open $file: $!";
+
 	while (<$input>) {
-		chomp;
-		# do something with $_
-		}
+	    chomp;
+	    # do something with $_
+	}
+
 	close $input or die "can't close $file: $!";
 
 This is tremendously more efficient than reading the entire file into
@@ -1119,9 +1139,9 @@ line in the file.
 You can read the entire filehandle contents into a scalar.
 
 	{
-	local $/;
-	open my $fh, '<', $file or die "can't open $file: $!";
-	$var = <$fh>;
+	    local $/;
+	    open my $fh, '<', $file or die "can't open $file: $!";
+	    $var = <$fh>;
 	}
 
 That temporarily undefs your record separator, and will automatically
@@ -1163,45 +1183,45 @@ turns off echo processing as well.
 	use strict;
 	$| = 1;
 	for (1..4) {
-		print "gimme: ";
-		my $got = getone();
-		print "--> $got\n";
-		}
+	    print "gimme: ";
+	    my $got = getone();
+	    print "--> $got\n";
+	}
     exit;
 
 	BEGIN {
-	use POSIX qw(:termios_h);
+	    use POSIX qw(:termios_h);
 
-	my ($term, $oterm, $echo, $noecho, $fd_stdin);
+	    my ($term, $oterm, $echo, $noecho, $fd_stdin);
 
-	my $fd_stdin = fileno(STDIN);
+	    my $fd_stdin = fileno(STDIN);
 
-	$term     = POSIX::Termios->new();
-	$term->getattr($fd_stdin);
-	$oterm     = $term->getlflag();
+	    $term     = POSIX::Termios->new();
+	    $term->getattr($fd_stdin);
+	    $oterm     = $term->getlflag();
 
-	$echo     = ECHO | ECHOK | ICANON;
-	$noecho   = $oterm & ~$echo;
+	    $echo     = ECHO | ECHOK | ICANON;
+	    $noecho   = $oterm & ~$echo;
 
-	sub cbreak {
+	    sub cbreak {
 		$term->setlflag($noecho);
 		$term->setcc(VTIME, 1);
 		$term->setattr($fd_stdin, TCSANOW);
-		}
+	    }
 
-	sub cooked {
+	    sub cooked {
 		$term->setlflag($oterm);
 		$term->setcc(VTIME, 0);
 		$term->setattr($fd_stdin, TCSANOW);
-		}
+	    }
 
-	sub getone {
+	    sub getone {
 		my $key = '';
 		cbreak();
 		sysread(STDIN, $key, 1);
 		cooked();
 		return $key;
-		}
+	    }
 
 	}
 
@@ -1232,10 +1252,10 @@ It's very system dependent. Here's one solution that works on BSD
 systems:
 
 	sub key_ready {
-		my($rin, $nfd);
-		vec($rin, fileno(STDIN), 1) = 1;
-		return $nfd = select($rin,undef,undef,0);
-		}
+	    my($rin, $nfd);
+	    vec($rin, fileno(STDIN), 1) = 1;
+	    return $nfd = select($rin,undef,undef,0);
+	}
 
 If you want to find out how many characters are waiting, there's
 also the FIONREAD ioctl call to be looked at. The I<h2ph> tool that
@@ -1293,11 +1313,12 @@ If that doesn't work (it relies on features of your stdio implementation),
 then you need something more like this:
 
 	for (;;) {
-	  for ($curpos = tell(GWFILE); <GWFILE>; $curpos = tell(GWFILE)) {
-	    # search for some stuff and put it into files
-	  }
-	  # sleep for a while
-	  seek(GWFILE, $curpos, 0);  # seek to where we had been
+	    for ($curpos = tell(GWFILE); <GWFILE>; $curpos = tell(GWFILE)) {
+		# search for some stuff and put it into files
+	    }
+
+	    # sleep for a while
+	    seek(GWFILE, $curpos, 0);  # seek to where we had been
 	}
 
 If this still doesn't work, look into the C<clearerr> method
@@ -1350,8 +1371,8 @@ to, you may be able to do this:
 Or, just use the fdopen(3S) feature of C<open()>:
 
 	{
-	open my( $fh ), "<&=$fd" or die "Cannot reopen fd=$fd: $!";
-	close $fh;
+	    open my( $fh ), "<&=$fd" or die "Cannot reopen fd=$fd: $!";
+	    close $fh;
 	}
 
 =head2 Why can't I use "C:\temp\foo" in DOS paths?  Why doesn't `C:\temp\foo.exe` work?
@@ -1499,9 +1520,7 @@ a similar interface, but does the traversal for you too:
 
 	use File::Find::Rule;
 
-	my @files = File::Find::Rule->file()
-							 ->name( '*.pm' )
-							 ->in( @INC );
+	my @files = File::Find::Rule->file()->name( '*.pm' )->in( @INC );
 
 =head2 How do I delete a directory tree?
 
