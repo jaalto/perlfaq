@@ -244,7 +244,7 @@ illustrative:
 	    die sprintf "$0: ioctl TIOCGWINSZ (%08x: $!)\n", &TIOCGWINSZ;
 	}
 
-	my ($row, $col, $xpixel, $ypixel) = unpack('S4', $winsize);
+	my ($row, $col, $xpixel, $ypixel) = unpack 'S4', $winsize;
 
 	print "(row,col) = ($row,$col)";
 	print "  (xpixel,ypixel) = ($xpixel,$ypixel)" if $xpixel || $ypixel;
@@ -713,8 +713,8 @@ files:
     waitpid($pid, 0);
     seek $_, 0, 0 for \*CATCHOUT, \*CATCHERR;
 
-    while( <CATCHOUT> ) {}
-    while( <CATCHERR> ) {}
+    while ( <CATCHOUT> ) {}
+    while ( <CATCHERR> ) {}
 
 But there's no real need for B<both> to be tempfiles... the following
 should work just as well, without deadlocking:
@@ -726,12 +726,12 @@ should work just as well, without deadlocking:
     local *CATCHERR = IO::File->new_tmpfile;
     my $pid = open3(gensym, \*CATCHOUT, ">&CATCHERR", "cmd");
 
-    while( <CATCHOUT> ) {}
+    while ( <CATCHOUT> ) {}
 
     waitpid($pid, 0);
     seek CATCHERR, 0, 0;
 
-    while( <CATCHERR> ) {}
+    while ( <CATCHERR> ) {}
 
 And it'll be faster, too, since we can begin processing the program's
 stdout immediately, rather than waiting for the program to finish.
@@ -1159,7 +1159,7 @@ C<sysopen()>:
 
     use Fcntl;
 
-    sysopen(FH, "/foo/somefile", O_WRONLY|O_NDELAY|O_CREAT, 0644)
+    sysopen FH, "/foo/somefile", O_WRONLY|O_NDELAY|O_CREAT, 0644
 	    or die "can't open /foo/somefile: $!":
 
 =head2 How do I tell the difference between errors from the shell and perl?

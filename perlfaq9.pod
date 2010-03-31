@@ -82,7 +82,7 @@ placed in a C<BEGIN> block to catch compile-time warnings as well:
     BEGIN {
 	use CGI::Carp qw(carpout);
 
-	open(LOG, ">>/var/local/cgi-logs/mycgi-log")
+	open LOG, ">>/var/local/cgi-logs/mycgi-log"
 	    or die "Unable to append to mycgi-log: $!\n";
 
 	carpout(*LOG);
@@ -195,7 +195,7 @@ The C<CGI.pm> module (which comes with Perl) has functions to create
 the HTML form widgets. See the C<CGI.pm> documentation for more
 examples.
 
-    use CGI qw/:standard/;
+    use CGI qw(:standard);
 
     print header,
 	start_html('Favorite Animals'),
@@ -316,7 +316,7 @@ allow relative URLs in either case.
 Use of C<CGI.pm> is strongly recommended. This example shows redirection
 with a complete URL. This redirection is handled by the web browser.
 
-    use CGI qw/:standard/;
+    use CGI qw(:standard);
 
     my $url = 'http://www.cpan.org/';
     print redirect($url);
@@ -489,9 +489,9 @@ format after minor transliterations:
     tr#A-Za-z0-9+/##cd;                   # remove non-base64 chars
     tr#A-Za-z0-9+/# -_#;                  # convert to uuencoded format
 
-    $len = pack("c", 32 + 0.75*length);   # compute length byte
+    $len = pack "c", 32 + 0.75*length;    # compute length byte
 
-    print unpack("u", $len . $_);         # uudecode and print
+    print unpack "u", $len . $_;          # uudecode and print
 
 =head2 How do I return the user's mail address?
 
@@ -500,7 +500,7 @@ C<Sys::Hostname> module (which is part of the standard perl distribution),
 you can probably try using something like this:
 
     use Sys::Hostname;
-    $address = sprintf('%s@%s', scalar getpwuid($<), hostname);
+    $address = sprintf '%s@%s', scalar getpwuid($<), hostname;
 
 Company policies on mail address can mean that this generates addresses
 that the company's mail system will not accept, so you should ask for
@@ -529,7 +529,7 @@ Use the C<sendmail> program directly:
     in as many lines as you like.
     EOF
 
-    close(SENDMAIL)     or warn "sendmail didn't close nicely";
+    close SENDMAIL     or warn "sendmail didn't close nicely";
 
 The B<-oi> option prevents C<sendmail> from interpreting a line consisting
 of a single dot as "end of message". The B<-t> option says to use the

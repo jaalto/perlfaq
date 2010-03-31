@@ -87,7 +87,7 @@ call the C<autoflush> method to change the settings of the
 filehandle:
 
     use IO::Handle;
-    open my( $io_fh ), ">", "output.txt";
+    open my $io_fh, ">", "output.txt";
     $io_fh->autoflush(1);
 
 The C<IO::Handle> objects also have a C<flush> method. You can flush
@@ -290,7 +290,7 @@ you, you might just read chunks of data and count the number of
 newlines:
 
     my $lines = 0;
-    open my($fh), '<:raw', $filename   or die "Can't open $filename: $!";
+    open my $fh, '<:raw', $filename   or die "Can't open $filename: $!";
 
     while ( sysread $fh, $buffer, 4096 ) {
         $lines += ( $buffer =~ tr/\n// );
@@ -303,7 +303,7 @@ might change that C<tr///> to a C<s///> so you can count the number of
 times the input record separator, C<$/>, shows up:
 
     my $lines = 0;
-    open my($fh), '<:raw', $filename   or die "Can't open $filename: $!";
+    open my $fh, '<:raw', $filename   or die "Can't open $filename: $!";
 
     while ( sysread $fh, $buffer, 4096 ) {
         $lines += ( $buffer =~ s|$/||g; );
@@ -429,7 +429,7 @@ C<open()> function creates an anonymous temporary file:
 
 Otherwise, you can use the File::Temp module.
 
-    use File::Temp qw/ tempfile tempdir /;
+    use File::Temp qw(tempfile tempdir);
 
     my $dir = tempdir( CLEANUP => 1 );
     ($fh, $filename) = tempfile( DIR => $dir );
@@ -464,7 +464,7 @@ temporary files in one process, use a counter:
             until( defined(fileno(FH)) || $count++ > 100 ) {
                 $base_name =~ s/-(\d+)$/"-" . (1 + $1)/e;
                 # O_EXCL is required for security reasons.
-                sysopen my($fh), $base_name, O_WRONLY|O_EXCL|O_CREAT;
+                sysopen my $fh, $base_name, O_WRONLY|O_EXCL|O_CREAT;
             }
 
             if ( defined fileno($fh) ) {
@@ -474,7 +474,6 @@ temporary files in one process, use a counter:
                 return ();
             }
         }
-
     }
 
 =head2 How can I manipulate fixed-record-length files?
@@ -499,13 +498,13 @@ Berkeley-style ps:
 
     while (<$ps>) {
         my %process;
-        @process{@fields} = unpack($PS_T, $_);
+        @process{@fields} = unpack $PS_T, $_;
 
         for my $field ( @fields ) {
             print "$field: <$process{$field}>\n";
         }
 
-        print 'line=', pack($PS_T, @process{@fields} ), "\n";
+        print 'line=', pack($PS_T, @process{@fields}), "\n";
     }
 
 We've used a hash slice in order to easily handle the fields of each row.
@@ -671,11 +670,12 @@ Since Perl 5.8.0 a file handle referring to a string can be created by
 calling open with a reference to that string instead of the filename.
 This file handle can then be used to read from or write to the string:
 
-    open(my $fh, '>', \$string) or die "Could not open string for writing";
+    open my $fh, '>', \$string   or  die "Could not open string for writing";
+
     print $fh "foo\n";
     print $fh "bar\n";      # $string now contains "foo\nbar\n"
 
-    open(my $fh, '<', \$string) or die "Could not open string for reading";
+    open my $fh, '<', \$string  or  die "Could not open string for reading";
     my $x = <$fh>;  # $x now contains "foo\n"
 
 With older versions of Perl, the C<IO::String> module provides similar
@@ -1268,9 +1268,9 @@ I<sys/ioctl.ph> file:
 
     require 'sys/ioctl.ph';
 
-    $size = pack("L", 0);
+    $size = pack "L", 0;
     ioctl(FH, FIONREAD(), $size)    or die "Couldn't call ioctl: $!\n";
-    $size = unpack("L", $size);
+    $size = unpack "L", $size;
 
 If I<h2ph> wasn't installed or doesn't work for you, you can
 I<grep> the include files by hand:
@@ -1294,9 +1294,9 @@ And then hard code it, leaving porting as an exercise to your successor.
 
     $FIONREAD = 0x4004667f;         # XXX: opsys dependent
 
-    $size = pack("L", 0);
+    $size = pack "L", 0;
     ioctl(FH, $FIONREAD, $size)     or die "Couldn't call ioctl: $!\n";
-    $size = unpack("L", $size);
+    $size = unpack "L", $size;
 
 FIONREAD requires a filehandle connected to a stream, meaning that sockets,
 pipes, and tty devices work, but I<not> files.
@@ -1315,13 +1315,13 @@ next C<< <GWFILE> >> makes Perl try again to read something.
 If that doesn't work (it relies on features of your stdio implementation),
 then you need something more like this:
 
-    for (;;) {
-        for ( $curpos = tell(GWFILE); <GWFILE>; $curpos = tell(GWFILE) ) {
+    for ( ;; ) {
+        for ( $curpos = tell GWFILE; <GWFILE>; $curpos = tell GWFILE ) {
             # search for some stuff and put it into files
         }
 
         # sleep for a while
-        seek(GWFILE, $curpos, 0);  # seek to where we had been
+        seek GWFILE, $curpos, 0;  # seek to where we had been
     }
 
 If this still doesn't work, look into the C<clearerr> method
@@ -1374,7 +1374,7 @@ to, you may be able to do this:
 Or, just use the fdopen(3S) feature of C<open()>:
 
     {
-        open my( $fh ), "<&=$fd" or die "Cannot reopen fd=$fd: $!";
+        open my $fh, "<&=$fd" or die "Cannot reopen fd=$fd: $!";
         close $fh;
     }
 
@@ -1427,7 +1427,7 @@ the file, there are a couple of things that you can do.
 Here's a reservoir-sampling algorithm from the Camel Book:
 
     srand;
-    rand($.) < 1 && ($line = $_) while <>;
+    rand $. < 1 && ($line = $_) while <>;
 
 This has a significant advantage in space over reading the whole file
 in. You can find a proof of this method in I<The Art of Computer
@@ -1436,7 +1436,7 @@ Programming>, Volume 2, Section 3.4.2, by Donald E. Knuth.
 You can use the C<File::Random> module which provides a function
 for that algorithm:
 
-    use File::Random qw/random_line/;
+    use File::Random qw(random_line);
     my $line = random_line($filename);
 
 Another way is to use the C<Tie::File> module, which treats the entire

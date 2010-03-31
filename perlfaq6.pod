@@ -221,20 +221,20 @@ complete line (using your regular expression).
 
 	local $_ = "";
 
-	while( sysread FH, $_, 8192, length ) {
-	    while( s/^((?s).*?)your_pattern// ) {
+	while ( sysread FH, $_, 8192, length ) {
+	    while ( s/^((?s).*?)your_pattern// ) {
 		my $record = $1;
 		# do stuff here.
 	    }
 	}
 
-You can do the same thing with foreach and a match using the
+You can do the same thing with for loop and a match using the
 c flag and the \G anchor, if you do not mind your entire file
 being in memory at the end.
 
     local $_ = "";
 
-    while( sysread FH, $_, 8192, length ) {
+    while ( sysread FH, $_, 8192, length ) {
 	for my $record ( m/\G((?s).*?)your_pattern/gc ) {
 		# do stuff here.
 	}
@@ -412,7 +412,7 @@ prints the lines of input that match it:
 
     my $pattern = shift @ARGV;
 
-    while( <> ) {
+    while ( <> ) {
 	print if m/$pattern/;
     }
 
@@ -423,7 +423,7 @@ time, then reuse that for subsequent iterations:
 
     my $pattern = shift @ARGV;
 
-    while( <> ) {
+    while ( <> ) {
 	print if m/$pattern/o; # useful for Perl < 5.6
     }
 
@@ -616,7 +616,7 @@ to process. Keep doing that until you get no matches:
 
     $" = "\n\t";
 
-    while( @queue ) {
+    while ( @queue ) {
 	my $string = shift @queue;
 
 	my @groups = $string =~ m/$regex/g;
@@ -729,14 +729,14 @@ X<regular expression, efficiency>
 
 Avoid asking Perl to compile a regular expression every time
 you want to match it. In this example, perl must recompile
-the regular expression for every iteration of the C<foreach>
+the regular expression for every iteration of the C<for>
 loop since it has no way to know what $pattern will be.
 
     my @patterns = qw( foo bar baz );
 
-    LINE: while( <DATA> ) {
+    LINE: while ( <DATA> ) {
 	for $pattern ( @patterns ) {
-	    if( /\b$pattern\b/i ) {
+	    if ( /\b$pattern\b/i ) {
 		print;
 		next LINE;
 	    }
@@ -752,9 +752,9 @@ but faster.
 
     my @patterns = map { qr/\b$_\b/i } qw( foo bar baz );
 
-    LINE: while( <> ) {
+    LINE: while ( <> ) {
 	for $pattern ( @patterns ) {
-	    if( /$pattern/ ) {
+	    if ( /$pattern/ ) {
 		print;
 		next LINE;
 	    }
@@ -767,7 +767,7 @@ backtracking though.
 
     my $regex = join '|', qw( foo bar baz );
 
-    LINE: while( <> ) {
+    LINE: while ( <> ) {
 	print if /\b(?:$regex)\b/i;
     }
 
@@ -908,7 +908,7 @@ and the next match on the same string starts at the beginning.
 
     $_ = "1122a44";
 
-    while( m/\G(\d\d)/g ) {
+    while ( m/\G(\d\d)/g ) {
 	print "Found $1\n";
     }
 
@@ -924,7 +924,7 @@ C<44>.
 
 	$_ = "1122a44";
 
-	while( m/\G(\d\d)/gc ) {
+	while ( m/\G(\d\d)/gc ) {
 	    print "Found $1\n";
 	}
 
@@ -1122,7 +1122,9 @@ around the whole thing.
     chomp( my $input = <STDIN> );
 
     eval {
-	if( $string =~ m/\Q$input\E/ ) { ... }
+	if ( $string =~ m/\Q$input\E/ ) { 
+	    ...
+	}
     };
 
     warn $@ if $@;

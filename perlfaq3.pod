@@ -698,9 +698,9 @@ instead of this:
 
 
     # Bad Idea
-
     @data = <FILE>;
-    foreach ( @data ) {
+
+    for ( @data ) {
 	# code
     }
 
@@ -718,7 +718,7 @@ will cause the entire file to be slurped. For large files, it's better
 to loop:
 
     while ( <FILE> ) {
-        push(@wanted, $_) if /pattern/;
+        push @wanted, $_ if /pattern/;
     }
 
 =item * Avoid unnecessary quotes and stringification
@@ -953,7 +953,7 @@ Yes. Read L<perlrun> for more information. Some examples follow.
     perl -lane 'print $F[0] + $F[-1]' *
 
     # identify text files
-    perl -le 'for(@ARGV) {print if -f && -T _}' *
+    perl -le 'for ( @ARGV ) {print if -f && -T _}' *
 
     # remove (most) comments from C program
     perl -0777 -pe 's{/\*.*?\*/}{}gs' foo.c

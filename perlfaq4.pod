@@ -96,7 +96,7 @@ Remember that C<int()> merely truncates toward 0. For rounding to a
 certain number of digits, C<sprintf()> or C<printf()> is usually the
 easiest route.
 
-    printf("%.3f", 3.1415926535);   # prints 3.142
+    printf "%.3f", 3.1415926535;   # prints 3.142
 
 The C<POSIX> module (part of the standard Perl distribution)
 implements C<ceil()>, C<floor()>, and a number of other mathematical
@@ -159,7 +159,7 @@ Using the C<hex> function:
 
 Using C<pack>:
 
-    $dec = unpack("N", pack("H8", substr("0" x 8 . "DEADBEEF", -8)));
+    $dec = unpack "N", pack("H8", substr("0" x 8 . "DEADBEEF", -8));
 
 Using the CPAN module C<Bit::Vector>:
 
@@ -171,12 +171,12 @@ Using the CPAN module C<Bit::Vector>:
 
 Using C<sprintf>:
 
-    $hex = sprintf("%X", 3735928559); # upper case A-F
-    $hex = sprintf("%x", 3735928559); # lower case a-f
+    $hex = sprintf "%X", 3735928559; # upper case A-F
+    $hex = sprintf "%x", 3735928559; # lower case a-f
 
 Using C<unpack>:
 
-    $hex = unpack("H*", pack("N", 3735928559));
+    $hex = unpack "H*", pack("N", 3735928559);
 
 Using C<Bit::Vector>:
 
@@ -199,7 +199,7 @@ Using Perl's built in conversion of numbers with leading zeros:
 
 Using the C<oct> function:
 
-    $dec = oct("33653337357");
+    $dec = oct "33653337357";
 
 Using C<Bit::Vector>:
 
@@ -212,13 +212,13 @@ Using C<Bit::Vector>:
 
 Using C<sprintf>:
 
-    $oct = sprintf("%o", 3735928559);
+    $oct = sprintf "%o", 3735928559;
 
 Using C<Bit::Vector>:
 
     use Bit::Vector;
     $vec = Bit::Vector->new_Dec(32, -559038737);
-    $oct = reverse join('', $vec->Chunk_List_Read(3));
+    $oct = reverse join '', $vec->Chunk_List_Read(3);
 
 =item How do I convert from binary to decimal
 
@@ -230,17 +230,18 @@ the C<0b> notation:
 Using C<oct>:
 
     my $input = "10110110";
-    $decimal = oct( "0b$input" );
+    $decimal = oct "0b$input";
 
 Using C<pack> and C<ord>:
 
-    $decimal = ord(pack('B8', '10110110'));
+    $decimal = ord pack('B8', '10110110');
 
 Using C<pack> and C<unpack> for larger strings:
 
     $int = unpack("N", pack("B32",
-    substr("0" x 32 . "11110101011011011111011101111", -32)));
-    $dec = sprintf("%d", $int);
+            substr("0" x 32 . "11110101011011011111011101111", -32)));
+
+    $dec = sprintf "%d", $int;
 
     # substr() is used to left pad a 32 character string with zeros.
 
@@ -253,11 +254,11 @@ Using C<Bit::Vector>:
 
 Using C<sprintf> (perl 5.6+):
 
-    $bin = sprintf("%b", 3735928559);
+    $bin = sprintf "%b", 3735928559;
 
 Using C<unpack>:
 
-    $bin = unpack("B*", pack("N", 3735928559));
+    $bin = unpack "B*", pack("N", 3735928559);
 
 Using C<Bit::Vector>:
 
@@ -316,7 +317,7 @@ For example:
 To call a function on each element of an array, but ignore the
 results:
 
-    foreach $iterator ( @array ) {
+    for $iterator ( @array ) {
 	some_func($iterator);
     }
 
@@ -330,14 +331,14 @@ ranges. Instead use:
 
     @results = ();
     for ( $i=5; $i < 500_005; $i++ ) {
-	push(@results, some_func($i));
+	push @results, some_func($i);
     }
 
 This situation has been fixed in Perl5.005. Use of C<..> in a C<for>
 loop will iterate over the range, without creating the entire range.
 
     for my $i ( 5 .. 500_005 ) {
-	push(@results, some_func($i));
+	push @results, some_func($i);
     }
 
 will not create a list of 500,000 integers.
@@ -413,14 +414,14 @@ argument C<localtime> uses the current time.
 The C<POSIX> module can also format a date as the day of the year or
 week of the year.
 
-    use POSIX qw/strftime/;
+    use POSIX qw(strftime);
     my $day_of_year  = strftime "%j", localtime;
     my $week_of_year = strftime "%W", localtime;
 
 To get the day of year for any date, use C<POSIX>'s C<mktime> to get
 a time in epoch seconds for the argument to C<localtime>.
 
-    use POSIX qw/mktime strftime/;
+    use POSIX qw(mktime strftime);
     my $week_of_year = strftime "%W",
 		       localtime( mktime( 0, 0, 0, 18, 11, 87 ) );
 
@@ -695,7 +696,7 @@ really does work:
     ($re=$_)=~s/((BEGIN)|(END)|.)/$)[!$3]\Q$1\E$([!$2]/gs;
     @$ = (eval{/$re/},$@!~/unmatched/i);
 
-    print join("\n",@$[0..$#$]) if( $$[-1] );
+    print join "\n", @$[0..$#$] if ( $$[-1] );
 
 =head2 How do I reverse a string?
 
@@ -874,13 +875,13 @@ suggests (assuming your string is contained in C<$text>):
 
      @new = ();
 
-     push(@new, $+) while $text =~ m{
+     push @new, $+ while $text =~ m{
 	     "([^\"\\]*(?:\\.[^\"\\]*)*)",?  # groups the phrase inside the quotes
 	    | ([^,]+),?
 	    | ,
 	    }gx;
 
-     push(@new, undef) if substr($text,-1,1) eq ',';
+     push @new, undef   if substr($text, -1, 1) eq ',';
 
 If you want to represent quotation marks inside a
 quotation-mark-delimited field, escape them with backslashes (eg,
@@ -919,7 +920,7 @@ the newline to the output, which has the added benefit of preserving
 "blank" (consisting entirely of whitespace) lines which the C<^\s+>
 would remove all by itself.
 
-    while( <> ) {
+    while ( <> ) {
 	s/^\s+|\s+$//g;
 	print "$_\n";
     }
@@ -956,19 +957,19 @@ right with blanks and it will truncate the result to a maximum length of
 C<$pad_len>.
 
     # Left padding a string with blanks (no truncation):
-    $padded = sprintf("%${pad_len}s", $text);
-    $padded = sprintf("%*s", $pad_len, $text);  # same thing
+    $padded = sprintf "%${pad_len}s", $text;
+    $padded = sprintf "%*s", $pad_len, $text;  # same thing
 
     # Right padding a string with blanks (no truncation):
-    $padded = sprintf("%-${pad_len}s", $text);
-    $padded = sprintf("%-*s", $pad_len, $text); # same thing
+    $padded = sprintf "%-${pad_len}s", $text;
+    $padded = sprintf "%-*s", $pad_len, $text; # same thing
 
     # Left padding a number with 0 (no truncation):
-    $padded = sprintf("%0${pad_len}d", $num);
-    $padded = sprintf("%0*d", $pad_len, $num); # same thing
+    $padded = sprintf "%0${pad_len}d", $num;
+    $padded = sprintf "%0*d", $pad_len, $num; # same thing
 
     # Right padding a string with blanks using pack (will truncate):
-    $padded = pack("A$pad_len",$text);
+    $padded = pack "A$pad_len", $text;
 
 If you need to pad with a character other than blank or zero you can use
 one of the following methods. They all generate a pad string with the
@@ -992,7 +993,7 @@ Left and right padding with any character, modifying C<$text> directly:
 If you know where the columns that contain the data, you can
 use C<substr> to extract a single column.
 
-    my $column = substr( $line, $start_column, $length );
+    my $column = substr $line, $start_column, $length;
 
 You can use C<split> if the columns are separated by whitespace or
 some other delimiter, as long as whitespace or the delimiter cannot
@@ -1224,8 +1225,8 @@ for list operations, so list operations also work on arrays:
     @animals[2,3];
 
     # iteration
-    foreach ( qw( dog cat bird ) ) { ... }
-    foreach ( @animals ) { ... }
+    for ( qw( dog cat bird ) ) { ... }
+    for ( @animals ) { ... }
 
     my @three = grep { length == 3 } qw( dog cat bird );
     my @three = grep { length == 3 } @animals;
@@ -1249,11 +1250,11 @@ You can change an array element, but you can't change a list element:
     $animals[0] = 'Rottweiler';
     qw( dog cat bird )[0] = 'Rottweiler'; # syntax error!
 
-    foreach ( @animals ) {
+    for ( @animals ) {
 	s/^d/fr/;  # works fine
     }
 
-    foreach ( qw( dog cat bird ) ) {
+    for ( qw( dog cat bird ) ) {
 	s/^d/fr/;  # Error! Modification of read only value!
     }
 
@@ -1337,7 +1338,7 @@ elements.
 
     my %hash   = map { $_, 1 } @array;
     # or a hash slice: @hash{ @array } = ();
-    # or a foreach: $hash{$_} = 1 foreach ( @array );
+    # or a for: $hash{$_} = 1 for ( @array );
 
     my @unique = keys %hash;
 
@@ -1364,7 +1365,7 @@ next element.
     my @unique;
     my %seen;
 
-    foreach my $elem ( @array ) {
+    for my $elem ( @array ) {
 	next if $seen{ $elem }++;
 	push @unique, $elem;
     }
@@ -1402,7 +1403,7 @@ are going to make this query many times over arbitrary string values,
 the fastest way is probably to invert the original array and maintain a
 hash whose keys are the first array's values:
 
-    my @blues = qw/azure cerulean teal turquoise lapis-lazuli/;
+    my @blues = qw(azure cerulean teal turquoise lapis-lazuli);
     my %is_blue;
     for ( @blues ) { $is_blue{$_} = 1 }
 
@@ -1441,7 +1442,7 @@ looks like this subroutine:
     sub first (&@) {
 	my $code = shift;
 
-	foreach (@_) {
+	for (@_) {
 	    return $_ if &{$code}();
 	}
 
@@ -1468,9 +1469,9 @@ element is unique in a given array:
     my @union = @intersection = @difference = ();
     my %count;
 
-    foreach $element ( @array1, @array2 ) { $count{$element}++ }
+    for $element ( @array1, @array2 ) { $count{$element}++ }
 
-    foreach $element ( keys %count ) {
+    for $element ( keys %count ) {
 	push @union, $element;
 	push @{ $count{$element} > 1 ? \@intersection : \@difference }, $element;
     }
@@ -1561,7 +1562,7 @@ same thing. Once you find the element, you stop the loop with last.
 
     my $found;
 
-    foreach ( @array ) {
+    for ( @array ) {
 	if ( /Perl/ ) { $found = $_; last }
     }
 
@@ -1668,7 +1669,7 @@ circular arrays:
     my $color_iterator = Array::Iterator::Circular->new(
 				qw(red green blue orange) );
 
-    foreach ( 1 .. 20 ) {
+    for ( 1 .. 20 ) {
 	print $color_iterator->next, "\n";
     }
 
@@ -1725,7 +1726,7 @@ won't notice this until you have rather largish arrays.
 
 =head2 How do I process/modify each element of an array?
 
-Use C<for>/C<foreach>:
+Use C<for>/C<for>:
 
     for ( @lines ) {
 	s/foo/bar/;     # change that word
@@ -1937,8 +1938,9 @@ your C<@ints> array:
 	    use integer;
 
 	    my $bits = unpack "b*", $vec;
+
 	    push @ints, 0 if $bits =~ s/^(\d)// && $1;
-	    push @ints, pos $bits while($bits =~ /1/g);
+	    push @ints, pos $bits while ($bits =~ /1/g);
 	}
 
 	return \@ints;
@@ -2001,7 +2003,7 @@ Here's a more extensive illustration using vec():
 
     sub pvec {
 	my $vector = shift;
-	my $bits = unpack("b*", $vector);
+	my $bits = unpack "b*", $vector;
 	my $i = 0;
 	my $BASE = 8;
 
@@ -2057,7 +2059,7 @@ If the hash is very large, you might not want to create a long list of
 keys. To save some memory, you can grab one key-value pair at a time using
 C<each()>, which returns a pair you haven't seen yet:
 
-    while( my ($key, $value) = each %hash ) {
+    while ( my ($key, $value) = each %hash ) {
 	...
     }
 
@@ -2089,7 +2091,7 @@ duplicates:
 
     my %new_hash = %hash1; # make a copy; leave %hash1 alone
 
-    foreach my $key2 ( keys %hash2 ) {
+    for my $key2 ( keys %hash2 ) {
 	if ( exists $new_hash{$key2} ) {
 	    warn "Key [$key2] is in both hashes!";
 	    # handle the duplicate (perhaps only warning)
@@ -2104,7 +2106,7 @@ duplicates:
 If you don't want to create a new hash, you can still use this looping
 technique; just change the C<%new_hash> to C<%hash1>.
 
-    foreach my $key2 ( keys %hash2 ) {
+    for my $key2 ( keys %hash2 ) {
 	if ( exists $hash1{$key2} ) {
 	    warn "Key [$key2] is in both hashes!";
 	    # handle the duplicate (perhaps only warning)
@@ -2439,7 +2441,7 @@ However, if you want the old behavior (and think carefully about that
 because it's a weird side effect), you can pass a hash slice instead.
 Perl 5.004 didn't make this a special case:
 
-    my_sub( @hash{ qw/foo/ } );
+    my_sub( @hash{foo} );
 
 =head2 How can I make the Perl equivalent of a C structure/C++ class/hash or array of hashes or arrays?
 
