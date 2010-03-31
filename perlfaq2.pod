@@ -79,14 +79,14 @@ approaches are doomed to failure.
 One simple way to check that things are in the right place is to print out
 the hard-coded C<@INC> that perl looks through for libraries:
 
-    % perl -le 'print for @INC'
+    $ perl -le 'print for @INC'
 
 If this command lists any paths that don't exist on your system, then you
 may need to move the appropriate libraries to these locations, or create
 symbolic links, aliases, or shortcuts appropriately. C<@INC> is also printed as
 part of the output of
 
-    % perl -V
+    $ perl -V
 
 You might also want to check out
 L<perlfaq8/"How do I keep my own module/library directory?">.
