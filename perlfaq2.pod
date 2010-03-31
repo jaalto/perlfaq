@@ -35,19 +35,19 @@ source release of perl).
 
 ActiveState: Windows, Linux, Mac OS X, Solaris, AIX and HP-UX
 
-	http://www.activestate.com/
+    http://www.activestate.com/
 
 Sunfreeware.com: Solaris 2.5 to Solaris 10 (SPARC and x86)
 
-	http://www.sunfreeware.com/
+    http://www.sunfreeware.com/
 
 Strawberry Perl: Windows, Perl 5.8.8 and 5.10.0
 
-	http://www.strawberryperl.com
-	
+    http://www.strawberryperl.com
+
 IndigoPerl: Windows
 
-	http://indigostar.com/
+    http://indigostar.com/
 
 =head2 I don't have a C compiler. How can I build my own Perl interpreter?
 
@@ -180,11 +180,11 @@ by the time you read this. These URLs might also be useful:
 
 Several groups devoted to the Perl language are on Usenet:
 
-	comp.lang.perl.announce      Moderated announcement group
-	comp.lang.perl.misc          High traffic general Perl discussion
-	comp.lang.perl.moderated     Moderated discussion group
-	comp.lang.perl.modules       Use and development of Perl modules
-	comp.lang.perl.tk            Using Tk (and X) from Perl
+    comp.lang.perl.announce      Moderated announcement group
+    comp.lang.perl.misc          High traffic general Perl discussion
+    comp.lang.perl.moderated     Moderated discussion group
+    comp.lang.perl.modules       Use and development of Perl modules
+    comp.lang.perl.tk            Using Tk (and X) from Perl
 
 Some years ago, comp.lang.perl was divided into those groups, and
 comp.lang.perl itself officially removed. While that group may still
@@ -232,38 +232,38 @@ can write to perlfaq-workers@perl.org .
 The incontestably definitive reference book on Perl, written by
 the creator of Perl, is Programming Perl:
 
-	Programming Perl (the "Camel Book"):
-	by Larry Wall, Tom Christiansen, and Jon Orwant
-	ISBN 0-596-00027-8  [3rd edition July 2000]
-	http://www.oreilly.com/catalog/pperl3/
-	(English, translations to several languages are also available)
+    Programming Perl (the "Camel Book"):
+    by Larry Wall, Tom Christiansen, and Jon Orwant
+    ISBN 0-596-00027-8  [3rd edition July 2000]
+    http://www.oreilly.com/catalog/pperl3/
+    (English, translations to several languages are also available)
 
 The companion volume to the Camel containing thousands
 of real-world examples, mini-tutorials, and complete programs is:
 
-	The Perl Cookbook (the "Ram Book"):
-	by Tom Christiansen and Nathan Torkington,
-	    with Foreword by Larry Wall
-	ISBN 0-596-00313-7 [2nd Edition August 2003]
-	http://www.oreilly.com/catalog/perlckbk2/
+    The Perl Cookbook (the "Ram Book"):
+    by Tom Christiansen and Nathan Torkington,
+	with Foreword by Larry Wall
+    ISBN 0-596-00313-7 [2nd Edition August 2003]
+    http://www.oreilly.com/catalog/perlckbk2/
 
 If you're already a seasoned programmer, then the Camel Book might
 suffice for you to learn Perl. If you're not, check out the
 Llama book:
 
-	Learning Perl
-	by Randal L. Schwartz, Tom Phoenix, and brian d foy
-	ISBN 0-596-10105-8 [4th edition July 2005]
-	http://www.oreilly.com/catalog/learnperl4/
+    Learning Perl
+    by Randal L. Schwartz, Tom Phoenix, and brian d foy
+    ISBN 0-596-10105-8 [4th edition July 2005]
+    http://www.oreilly.com/catalog/learnperl4/
 
 And for more advanced information on writing larger programs,
 presented in the same style as the Llama book, continue your education
 with the Alpaca book:
 
-	Intermediate Perl (the "Alpaca Book")
-	by Randal L. Schwartz and brian d foy, with Tom Phoenix (foreword by Damian Conway)
-	ISBN 0-596-10206-2 [1st edition March 2006]
-	http://www.oreilly.com/catalog/lrnperlorm/
+    Intermediate Perl (the "Alpaca Book")
+    by Randal L. Schwartz and brian d foy, with Tom Phoenix (foreword by Damian Conway)
+    ISBN 0-596-10206-2 [1st edition March 2006]
+    http://www.oreilly.com/catalog/lrnperlorm/
 
 Addison-Wesley ( http://www.awlonline.com/ ) and Manning
 ( http://www.manning.com/ ) are also publishers of some fine Perl books
@@ -282,123 +282,123 @@ Recommended books on (or mostly on) Perl follow.
 
 =item References
 
-	Programming Perl
-	by Larry Wall, Tom Christiansen, and Jon Orwant
-	ISBN 0-596-00027-8 [3rd edition July 2000]
-	http://www.oreilly.com/catalog/pperl3/
+    Programming Perl
+    by Larry Wall, Tom Christiansen, and Jon Orwant
+    ISBN 0-596-00027-8 [3rd edition July 2000]
+    http://www.oreilly.com/catalog/pperl3/
 
-	Perl 5 Pocket Reference
-	by Johan Vromans
-	ISBN 0-596-00374-9 [4th edition July 2002]
-	http://www.oreilly.com/catalog/perlpr4/
+    Perl 5 Pocket Reference
+    by Johan Vromans
+    ISBN 0-596-00374-9 [4th edition July 2002]
+    http://www.oreilly.com/catalog/perlpr4/
 
 =item Tutorials
 
-	Beginning Perl
-	by James Lee
-	ISBN 1-59059-391-X [2nd edition August 2004]
-	http://apress.com/book/bookDisplay.html?bID=344
+    Beginning Perl
+    by James Lee
+    ISBN 1-59059-391-X [2nd edition August 2004]
+    http://apress.com/book/bookDisplay.html?bID=344
 
-	Elements of Programming with Perl
-	by Andrew L. Johnson
-	ISBN 1-884777-80-5 [1st edition October 1999]
-	http://www.manning.com/johnson/
+    Elements of Programming with Perl
+    by Andrew L. Johnson
+    ISBN 1-884777-80-5 [1st edition October 1999]
+    http://www.manning.com/johnson/
 
-	Learning Perl
-	by Randal L. Schwartz, Tom Phoenix, and brian d foy
-	ISBN 0-596-52010-7 [5th edition June 2008]
-	http://oreilly.com/catalog/9780596520106/
+    Learning Perl
+    by Randal L. Schwartz, Tom Phoenix, and brian d foy
+    ISBN 0-596-52010-7 [5th edition June 2008]
+    http://oreilly.com/catalog/9780596520106/
 
-	Intermediate Perl (the "Alpaca Book")
-	by Randal L. Schwartz and brian d foy, with Tom Phoenix (foreword by Damian Conway)
-	ISBN 0-596-10206-2 [1st edition March 2006]
-	http://www.oreilly.com/catalog/intermediateperl/
+    Intermediate Perl (the "Alpaca Book")
+    by Randal L. Schwartz and brian d foy, with Tom Phoenix (foreword by Damian Conway)
+    ISBN 0-596-10206-2 [1st edition March 2006]
+    http://www.oreilly.com/catalog/intermediateperl/
 
-	Mastering Perl
-	by brian d foy
-	ISBN 0-596-52724-1 [1st edition July 2007]
-	http://www.oreilly.com/catalog/9780596527242/
+    Mastering Perl
+    by brian d foy
+    ISBN 0-596-52724-1 [1st edition July 2007]
+    http://www.oreilly.com/catalog/9780596527242/
 
 =item Task-Oriented
 
-	Writing Perl Modules for CPAN
-	by Sam Tregar
-	ISBN 1-59059-018-X [1st edition August 2002]
-	http://apress.com/book/bookDisplay.html?bID=14
+    Writing Perl Modules for CPAN
+    by Sam Tregar
+    ISBN 1-59059-018-X [1st edition August 2002]
+    http://apress.com/book/bookDisplay.html?bID=14
 
-	The Perl Cookbook
-	by Tom Christiansen and Nathan Torkington
-	    with foreword by Larry Wall
-	ISBN 1-56592-243-3 [1st edition August 1998]
-	http://www.oreilly.com/catalog/cookbook/
+    The Perl Cookbook
+    by Tom Christiansen and Nathan Torkington
+	with foreword by Larry Wall
+    ISBN 1-56592-243-3 [1st edition August 1998]
+    http://www.oreilly.com/catalog/cookbook/
 
-	Effective Perl Programming
-	by Joseph Hall
-	ISBN 0-201-41975-0 [1st edition 1998]
-	http://www.awl.com/
+    Effective Perl Programming
+    by Joseph Hall
+    ISBN 0-201-41975-0 [1st edition 1998]
+    http://www.awl.com/
 
-	Real World SQL Server Administration with Perl
-	by Linchi Shea
-	ISBN 1-59059-097-X [1st edition July 2003]
-	http://apress.com/book/bookDisplay.html?bID=171
+    Real World SQL Server Administration with Perl
+    by Linchi Shea
+    ISBN 1-59059-097-X [1st edition July 2003]
+    http://apress.com/book/bookDisplay.html?bID=171
 
 =item Special Topics
 
-	Perl Best Practices
-	by Damian Conway
-	ISBN: 0-596-00173-8 [1st edition July 2005]
-	http://www.oreilly.com/catalog/perlbp/
+    Perl Best Practices
+    by Damian Conway
+    ISBN: 0-596-00173-8 [1st edition July 2005]
+    http://www.oreilly.com/catalog/perlbp/
 
-	Higher Order Perl
-	by Mark-Jason Dominus
-	ISBN: 1558607013 [1st edition March 2005]
-	http://hop.perl.plover.com/
+    Higher Order Perl
+    by Mark-Jason Dominus
+    ISBN: 1558607013 [1st edition March 2005]
+    http://hop.perl.plover.com/
 
-	Perl 6 Now: The Core Ideas Illustrated with Perl 5
-	by Scott Walters
-	ISBN 1-59059-395-2 [1st edition December 2004]
-	http://apress.com/book/bookDisplay.html?bID=355
+    Perl 6 Now: The Core Ideas Illustrated with Perl 5
+    by Scott Walters
+    ISBN 1-59059-395-2 [1st edition December 2004]
+    http://apress.com/book/bookDisplay.html?bID=355
 
-	Mastering Regular Expressions
-	by Jeffrey E. F. Friedl
-	ISBN 0-596-00289-0 [2nd edition July 2002]
-	http://www.oreilly.com/catalog/regex2/
+    Mastering Regular Expressions
+    by Jeffrey E. F. Friedl
+    ISBN 0-596-00289-0 [2nd edition July 2002]
+    http://www.oreilly.com/catalog/regex2/
 
-	Network Programming with Perl
-	by Lincoln Stein
-	ISBN 0-201-61571-1 [1st edition 2001]
-	http://www.awlonline.com/
+    Network Programming with Perl
+    by Lincoln Stein
+    ISBN 0-201-61571-1 [1st edition 2001]
+    http://www.awlonline.com/
 
-	Object Oriented Perl
-	by Damian Conway
-	    with foreword by Randal L. Schwartz
-	ISBN 1-884777-79-1 [1st edition August 1999]
-	http://www.manning.com/conway/
+    Object Oriented Perl
+    by Damian Conway
+	with foreword by Randal L. Schwartz
+    ISBN 1-884777-79-1 [1st edition August 1999]
+    http://www.manning.com/conway/
 
-	Data Munging with Perl
-	by Dave Cross
-	ISBN 1-930110-00-6 [1st edition 2001]
-	http://www.manning.com/cross
+    Data Munging with Perl
+    by Dave Cross
+    ISBN 1-930110-00-6 [1st edition 2001]
+    http://www.manning.com/cross
 
-	Mastering Perl/Tk
-	by Steve Lidie and Nancy Walsh
-	ISBN 1-56592-716-8 [1st edition January 2002]
-	http://www.oreilly.com/catalog/mastperltk/
+    Mastering Perl/Tk
+    by Steve Lidie and Nancy Walsh
+    ISBN 1-56592-716-8 [1st edition January 2002]
+    http://www.oreilly.com/catalog/mastperltk/
 
-	Extending and Embedding Perl
-	by Tim Jenness and Simon Cozens
-	ISBN 1-930110-82-0 [1st edition August 2002]
-	http://www.manning.com/jenness
+    Extending and Embedding Perl
+    by Tim Jenness and Simon Cozens
+    ISBN 1-930110-82-0 [1st edition August 2002]
+    http://www.manning.com/jenness
 
-	Perl Debugger Pocket Reference
-	by Richard Foley
-	ISBN 0-596-00503-2 [1st edition January 2004]
-	http://www.oreilly.com/catalog/perldebugpr/
+    Perl Debugger Pocket Reference
+    by Richard Foley
+    ISBN 0-596-00503-2 [1st edition January 2004]
+    http://www.oreilly.com/catalog/perldebugpr/
 
-	Pro Perl Debugging
-	by Richard Foley with Andy Lester
-	ISBN 1-59059-454-1 [1st edition July 2005]
-	http://www.apress.com/book/view/1590594541
+    Pro Perl Debugging
+    by Richard Foley with Andy Lester
+    ISBN 1-59059-454-1 [1st edition July 2005]
+    http://www.apress.com/book/view/1590594541
 
 =back
 
@@ -442,14 +442,14 @@ subscription information.
 
 A comprehensive list of Perl related mailing lists can be found at:
 
-	http://lists.perl.org/
+    http://lists.perl.org/
 
 =head2 Where are the archives for comp.lang.perl.misc?
 
 The Google search engine now carries archived and searchable newsgroup
 content.
 
-http://groups.google.com/group/comp.lang.perl.misc/topics
+    http://groups.google.com/group/comp.lang.perl.misc/topics
 
 If you have a question, you can be sure someone has already asked the
 same question at some point on c.l.p.m. It requires some time and patience
@@ -521,10 +521,10 @@ of mailing lists, web sites, and other services. There are also many
 other sub-domains for special topics like learning Perl, Perl news, jobs
 in Perl, such as:
 
-	http://learn.perl.org/
-	http://use.perl.org/
-	http://jobs.perl.org/
-	http://lists.perl.org/
+    http://learn.perl.org/
+    http://use.perl.org/
+    http://jobs.perl.org/
+    http://lists.perl.org/
 
 Perl Mongers uses the pm.org domain for services related to Perl user
 groups, including the hosting of mailing lists and web sites. See the
