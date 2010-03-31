@@ -14,7 +14,7 @@ The perlfaq comes with the standard Perl distribution, so if you have Perl
 you should have the perlfaq. You should also have the C<perldoc> tool
 that lets you read the L<perlfaq>:
 
-	$ perldoc perlfaq
+    $ perldoc perlfaq
 
 Besides your local system, you can find the perlfaq on the web, including
 at http://perldoc.perl.org/ .
@@ -47,7 +47,7 @@ You can also fork the git repository for the perlfaq and send a pull
 request so the main repository can pull your changes. The repository
 is at:
 
-       https://github.com/briandfoy/perlfaq
+    https://github.com/briandfoy/perlfaq
 
 =head2 What will happen if you mail your Perl programming problems to the authors?
 
@@ -1440,5 +1440,3 @@ How do I fetch/put an FTP file?
 How can I do RPC in Perl?
 
 =back
-
-
