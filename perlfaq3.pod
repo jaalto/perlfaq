@@ -13,18 +13,18 @@ Have you looked at CPAN (see L<perlfaq2>)?  The chances are that
 someone has already written a module that can solve your problem.
 Have you read the appropriate manpages?  Here's a brief index:
 
-	Basics	        perldata, perlvar, perlsyn, perlop, perlsub
-	Execution	perlrun, perldebug
-	Functions	perlfunc
-	Objects		perlref, perlmod, perlobj, perltie
-	Data Structures	perlref, perllol, perldsc
-	Modules		perlmod, perlmodlib, perlsub
-	Regexes		perlre, perlfunc, perlop, perllocale
-	Moving to perl5	perltrap, perl
-	Linking w/C	perlxstut, perlxs, perlcall, perlguts, perlembed
-	Various 	http://www.cpan.org/misc/olddoc/FMTEYEWTK.tgz
-			(not a man-page but still useful, a collection
-			 of various essays on Perl techniques)
+    Basics          perldata, perlvar, perlsyn, perlop, perlsub
+    Execution       perlrun, perldebug
+    Functions       perlfunc
+    Objects         perlref, perlmod, perlobj, perltie
+    Data Structures perlref, perllol, perldsc
+    Modules         perlmod, perlmodlib, perlsub
+    Regexes         perlre, perlfunc, perlop, perllocale
+    Moving to perl5 perltrap, perl
+    Linking w/C     perlxstut, perlxs, perlcall, perlguts, perlembed
+    Various         http://www.cpan.org/misc/olddoc/FMTEYEWTK.tgz
+		    (not a man-page but still useful, a collection
+		     of various essays on Perl techniques)
 
 A crude table of contents for the Perl manpage set is found in L<perltoc>.
 
@@ -33,7 +33,7 @@ A crude table of contents for the Perl manpage set is found in L<perltoc>.
 The typical approach uses the Perl debugger, described in the
 C<perldebug(1)> manpage, on an "empty" program, like this:
 
-    perl -de 42
+    $ perl -de 42
 
 Now just type in any legal Perl code, and it will be immediately
 evaluated. You can also examine the symbol table, get stack
@@ -64,29 +64,29 @@ be what you want.
 
 From the command line, you can use the C<cpan> command's C<-l> switch:
 
-	$ cpan -l
+    $ cpan -l
 
 You can also use C<cpan>'s C<-a> switch to create an autobundle file
 that C<CPAN.pm> understands and can use to re-install every module:
 
-	$ cpan -a
+    $ cpan -a
 
 Inside a Perl program, you can use the C<ExtUtils::Installed> module to
 show all installed distributions, although it can take awhile to do
 its magic. The standard library which comes with Perl just shows up
 as "Perl" (although you can get those with C<Module::CoreList>).
 
-	use ExtUtils::Installed;
+    use ExtUtils::Installed;
 
-	my $inst    = ExtUtils::Installed->new();
-	my @modules = $inst->modules();
+    my $inst    = ExtUtils::Installed->new();
+    my @modules = $inst->modules();
 
 If you want a list of all of the Perl module filenames, you
 can use C<File::Find::Rule>:
 
-	use File::Find::Rule;
+    use File::Find::Rule;
 
-	my @files = File::Find::Rule->
+    my @files = File::Find::Rule->
 		extras({follow => 1})->
 		file()->
 		name( '*.pm' )->
@@ -96,22 +96,22 @@ can use C<File::Find::Rule>:
 If you do not have that module, you can do the same thing
 with C<File::Find> which is part of the standard library:
 
-	use File::Find;
-	my @files;
+    use File::Find;
+    my @files;
 
-	find(
-	    {
-		wanted => sub {
-		    push @files, $File::Find::fullname
-			if -f $File::Find::fullname && /\.pm$/
-		},
-		follow => 1,
-		follow_skip => 2,
+    find(
+	{
+	    wanted => sub {
+		push @files, $File::Find::fullname
+		    if -f $File::Find::fullname && /\.pm$/
 	    },
-	    @INC
-	);
+	    follow => 1,
+	    follow_skip => 2,
+	},
+	@INC
+    );
 
-	print join "\n", @files;
+    print join "\n", @files;
 
 If you simply need to quickly check to see if a module is
 available, you can check for its documentation. If you can
@@ -119,12 +119,12 @@ read the documentation the module is most likely installed.
 If you cannot read the documentation, the module might not
 have any (in rare cases):
 
-	$ perldoc Module::Name
+    $ perldoc Module::Name
 
 You can also try to include the module in a one-liner to see if
 perl finds it:
 
-	$ perl -MModule::Name -e1
+    $ perl -MModule::Name -e1
 
 =head2 How do I debug my Perl programs?
 
@@ -136,19 +136,19 @@ on warnings and strictures, you can head off many problems before
 they get too big. You can find out more about these in L<strict>
 and L<warnings>.
 
-	#!/usr/bin/perl
-	use strict;
-	use warnings;
+    #!/usr/bin/perl
+    use strict;
+    use warnings;
 
 Beyond that, the simplest debugger is the C<print> function. Use it
 to look at values as you run your program:
 
-	print STDERR "The value is [$value]\n";
+    print STDERR "The value is [$value]\n";
 
 The C<Data::Dumper> module can pretty-print Perl data structures:
 
-	use Data::Dumper qw( Dumper );
-	print STDERR "The hash is " . Dumper( \%hash ) . "\n";
+    use Data::Dumper qw( Dumper );
+    print STDERR "The hash is " . Dumper( \%hash ) . "\n";
 
 Perl comes with an interactive debugger, which you can start with the
 C<-d> switch. It's fully explained in L<perldebug>.
@@ -172,31 +172,31 @@ The C<Devel> namespace has several modules which you can use to
 profile your Perl programs. The C<Devel::DProf> module comes with Perl
 and you can invoke it with the C<-d> switch:
 
-	perl -d:DProf program.pl
+    $ perl -d:DProf program.pl
 
 After running your program under C<DProf>, you'll get a F<tmon.out> file
 with the profile data. To look at the data, you can turn it into a
 human-readable report with the C<dprofpp> program that comes with
 C<Devel::DProf>.
 
-	dprofpp
+    $ dprofpp
 
 You can also do the profiling and reporting in one step with the C<-p>
 switch to C<dprofpp>:
 
-	dprofpp -p program.pl
+    $ dprofpp -p program.pl
 
 The C<Devel::NYTProf> (New York Times Profiler) does both statement
 and subroutine profiling. It's available from CPAN and you also invoke
 it with the C<-d> switch:
 
-	perl -d:NYTProf some_perl.pl
+    $ perl -d:NYTProf some_perl.pl
 
 Like C<DProf>, it creates a database of the profile information that you
 can turn into reports. The C<nytprofhtml> command turns the data into
 an HTML report similar to the C<Devel::Cover> report:
 
-	nytprofhtml
+    $ nytprofhtml
 
 CPAN has several other profilers that you can invoke in the same
 fashion. You might also be interested in using the C<Benchmark> to
@@ -227,7 +227,7 @@ http://www.stonehenge.com/merlyn/LinuxMag/col75.html .
 The C<B::Xref> module can be used to generate cross-reference reports
 for Perl programs.
 
-    perl -MO=Xref[,OPTIONS] scriptname.plx
+    $ perl -MO=Xref[,OPTIONS] scriptname.plx
 
 =head2 Is there a pretty-printer (formatter) for Perl?
 
@@ -421,7 +421,7 @@ http://www.vim.org/
 
 For vi lovers in general, Windows or elsewhere:
 
-	http://www.thomer.com/thomer/vi/vi.html
+    http://www.thomer.com/thomer/vi/vi.html
 
 nvi ( http://www.bostic.com/vi/ , available from CPAN in src/misc/) is
 yet another vi clone, unfortunately not available for Windows, but in
@@ -687,22 +687,22 @@ toward this:
 Don't read an entire file into memory if you can process it line
 by line. Or more concretely, use a loop like this:
 
-	#
-	# Good Idea
-	#
-	while (<FILE>) {
-	   # ...
-	}
+
+    # Good Idea
+
+    while ( <FILE> ) {
+       # code
+    }
 
 instead of this:
 
-	#
-	# Bad Idea
-	#
-	@data = <FILE>;
-	foreach (@data) {
-	    # ...
-	}
+
+    # Bad Idea
+
+    @data = <FILE>;
+    foreach ( @data ) {
+	# code
+    }
 
 When the files you're processing are small, it doesn't much matter which
 way you do it, but it makes a huge difference when they start getting
@@ -712,45 +712,45 @@ larger.
 
 Remember that both map and grep expect a LIST argument, so doing this:
 
-        @wanted = grep {/pattern/} <FILE>;
+    @wanted = grep {/pattern/} <FILE>;
 
 will cause the entire file to be slurped. For large files, it's better
 to loop:
 
-        while (<FILE>) {
-                push(@wanted, $_) if /pattern/;
-        }
+    while ( <FILE> ) {
+        push(@wanted, $_) if /pattern/;
+    }
 
 =item * Avoid unnecessary quotes and stringification
 
 Don't quote large strings unless absolutely necessary:
 
-        my $copy = "$large_string";
+    my $copy = "$large_string";
 
 makes 2 copies of $large_string (one for $copy and another for the
 quotes), whereas
 
-        my $copy = $large_string;
+    my $copy = $large_string;
 
 only makes one copy.
 
 Ditto for stringifying large arrays:
 
-	{
+    {
 	local $, = "\n";
 	print @big_array;
-	}
+    }
 
 is much more memory-efficient than either
 
-	print join "\n", @big_array;
+    print join "\n", @big_array;
 
 or
 
-	{
+    {
 	local $" = "\n";
 	print "@big_array";
-	}
+    }
 
 
 =item * Pass by reference
@@ -782,7 +782,7 @@ everything works out right.
     }
 
     for ( 1 .. 10 ) {
-        push @many, makeone();
+	push @many, makeone();
     }
 
     print $many[4][5], "\n";
@@ -1001,7 +1001,7 @@ command interpreter. Under Unix, the first two often work. Under DOS,
 it's entirely possible that neither works. If 4DOS was the command shell,
 you'd probably have better luck like this:
 
-  perl -e "print <Ctrl-x>"Hello world\n<Ctrl-x>""
+    perl -e "print <Ctrl-x>"Hello world\n<Ctrl-x>""
 
 Under the Mac, it depends which environment you are using. The MacPerl
 shell, or MPW, is much like Unix shells in its support for several
@@ -1024,7 +1024,7 @@ do I get 500 Errors" or "Why doesn't it run from the browser right
 when it runs fine on the command line", see the troubleshooting
 guides and references in L<perlfaq9> or in the CGI MetaFAQ:
 
-	http://www.perl.org/CGI_MetaFAQ.html
+    http://www.perl.org/CGI_MetaFAQ.html
 
 =head2 Where can I learn about object-oriented Perl programming?
 
@@ -1063,8 +1063,8 @@ A complete list of Perl's error messages and warnings with explanatory
 text can be found in L<perldiag>. You can also use the splain program
 (distributed with Perl) to explain the error messages:
 
-    perl program 2>diag.out
-    splain [-v] [-p] diag.out
+    $ perl program 2>diag.out
+    $ splain [-v] [-p] diag.out
 
 or change your program to explain the messages for you:
 
