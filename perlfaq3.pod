@@ -953,7 +953,7 @@ Yes. Read L<perlrun> for more information. Some examples follow.
     perl -lane 'print $F[0] + $F[-1]' *
 
     # identify text files
-    perl -le 'for ( @ARGV ) {print if -f && -T _}' *
+    perl -le '-f and -T _ and print for @ARGV' *
 
     # remove (most) comments from C program
     perl -0777 -pe 's{/\*.*?\*/}{}gs' foo.c
@@ -962,7 +962,7 @@ Yes. Read L<perlrun> for more information. Some examples follow.
     perl -e '$X=24*60*60; utime(time(),time() + 30 * $X,@ARGV)' *
 
     # find first unused uid
-    perl -le '$i++ while getpwuid($i); print $i'
+    perl -le '$i++ while getpwuid $i; print $i'
 
     # display reasonable manpath
     echo $PATH | perl -nl -072 -e '
