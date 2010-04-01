@@ -103,7 +103,7 @@ with C<File::Find> which is part of the standard library:
 	{
 	    wanted => sub {
 		push @files, $File::Find::fullname
-		    if -f $File::Find::fullname && /\.pm$/
+		    if -f $File::Find::fullname and /\.pm$/
 	    },
 	    follow => 1,
 	    follow_skip => 2,
@@ -691,7 +691,7 @@ by line. Or more concretely, use a loop like this:
     # Good Idea
 
     while ( <FILE> ) {
-       # code
+       ...
     }
 
 instead of this:
@@ -701,7 +701,7 @@ instead of this:
     @data = <FILE>;
 
     for ( @data ) {
-	# code
+	...
     }
 
 When the files you're processing are small, it doesn't much matter which
