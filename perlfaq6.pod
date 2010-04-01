@@ -753,7 +753,7 @@ but faster.
     my @patterns = map { qr/\b$_\b/i } qw( foo bar baz );
 
     LINE: while ( <> ) {
-	for $pattern ( @patterns ) {
+	for my $pattern ( @patterns ) {
 	    if ( /$pattern/ ) {
 		print;
 		next LINE;
@@ -1028,24 +1028,24 @@ Or like this:
     @chars = $martian =~ m/([A-Z][A-Z]|[^A-Z])/g;
     # The above is conceptually similar to:     @chars = $text =~ m/(.)/g;
 
-    for $char ( @chars ) {
+    for my $char ( @chars ) {
 	print "found GX!\n", last if $char eq 'GX';
     }
 
 Or like this:
 
-	while ( $martian =~ m/\G([A-Z][A-Z]|.)/gs ) {  # \G probably unneeded
-	    print "found GX!\n", last if $1 eq 'GX';
-	}
+    while ( $martian =~ m/\G([A-Z][A-Z]|.)/gs ) {  # \G probably unneeded
+	print "found GX!\n", last if $1 eq 'GX';
+    }
 
 Here's another, slightly less painful, way to do it from Benjamin
 Goldberg, who uses a zero-width negative look-behind assertion.
 
-	print "found GX!\n" if  $martian =~ m/
-		(?<![A-Z])
-		(?:[A-Z][A-Z])*?
-		GX
-	/x;
+    print "found GX!\n" if  $martian =~ m/
+	    (?<![A-Z])
+	    (?:[A-Z][A-Z])*?
+	    GX
+    /x;
 
 This succeeds if the "martian" character GX is in the string, and fails
 otherwise. If you don't like using (?<!), a zero-width negative
