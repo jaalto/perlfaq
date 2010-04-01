@@ -2393,12 +2393,12 @@ Use the C<Tie::IxHash> from CPAN.
 
     tie my %myhash, 'Tie::IxHash';
 
-    for ( my $i=0; $i<20; $i++ ) {
+    for ( my $i = 0; $i < 20; $i++ ) {
 	$myhash{$i} = 2*$i;
     }
 
     my @keys = keys %myhash;
-    # @keys = (0,1,2,3,...)
+    # @keys = (0, 1, 2, 3,...)
 
 =head2 Why does passing a subroutine an undefined element in a hash create it?
 
@@ -2409,17 +2409,17 @@ Are you using a really old version of Perl?
 Normally, accessing a hash key's value for a nonexistent key will
 I<not> create the key.
 
-    my %hash  = ();
-    my $value = $hash{ 'foo' };
-    print "This won't print\n" if exists $hash{ 'foo' };
+    my %hash;
+    my $value = $hash{foo};
+    print "This won't print\n" if exists $hash{foo};;
 
-Passing C<$hash{ 'foo' }> to a subroutine used to be a special case, though.
+Passing C<$hash{foo}> to a subroutine used to be a special case, though.
 Since you could assign directly to C<$_[0]>, Perl had to be ready to
 make that assignment so it created the hash key ahead of time:
 
-    my_sub( $hash{ 'foo' } );
+    my_sub( $hash{foo} );
 
-    print "This will print before 5.004\n" if exists $hash{ 'foo' };
+    print "This will print before 5.004\n" if exists $hash{foo};
 
     sub my_sub {
 	# $_[0] = 'bar'; # create hash key in case you do this
@@ -2429,9 +2429,9 @@ make that assignment so it created the hash key ahead of time:
 Since Perl 5.004, however, this situation is a special case and Perl
 creates the hash key only when you make the assignment:
 
-    my_sub( $hash{ 'foo' } );
+    my_sub( $hash{foo} );
 
-    print "This will print, even after 5.004\n" if exists $hash{ 'foo' };
+    print "This will print, even after 5.004\n" if exists $hash{foo};;
 
     sub my_sub {
 	$_[0] = 'bar';
