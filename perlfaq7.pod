@@ -724,24 +724,24 @@ in $whatchamacallit:
 
     SWITCH: for (ref $whatchamacallit) {
 
-	/^$/            && die "not a reference";
+	/^$/            and die "not a reference";
 
-	/SCALAR/        && do {
+	/SCALAR/        and do {
 				print_scalar($$ref);
 				last SWITCH;
 			};
 
-	/ARRAY/         && do {
+	/ARRAY/         and do {
 				print_array(@$ref);
 				last SWITCH;
 			};
 
-	/HASH/          && do {
+	/HASH/          and do {
 				print_hash(%$ref);
 				last SWITCH;
 			};
 
-	/CODE/          && do {
+	/CODE/          and do {
 				warn "can't print function ref";
 				last SWITCH;
 			};
