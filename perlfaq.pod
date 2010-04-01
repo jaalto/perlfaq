@@ -14,7 +14,7 @@ The perlfaq comes with the standard Perl distribution, so if you have Perl
 you should have the perlfaq. You should also have the C<perldoc> tool
 that lets you read the L<perlfaq>:
 
-    $ perldoc perlfaq
+	$ perldoc perlfaq
 
 Besides your local system, you can find the perlfaq on the web, including
 at http://perldoc.perl.org/ .
@@ -47,7 +47,7 @@ You can also fork the git repository for the perlfaq and send a pull
 request so the main repository can pull your changes. The repository
 is at:
 
-    https://github.com/briandfoy/perlfaq
+       https://github.com/briandfoy/perlfaq
 
 =head2 What will happen if you mail your Perl programming problems to the authors?
 
@@ -206,7 +206,7 @@ I copied the perl binary from one machine to another, but scripts don't work.
 
 =item *
 
-I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed. How do I make it work?
+I grabbed the sources and tried to compile but gdbm/dynamic loading/malloc/linking/... failed.  How do I make it work?
 
 =item *
 
@@ -801,11 +801,11 @@ Why can't I just open(FH, "E<gt>file.lock")?
 
 =item *
 
-I still don't get locking. I just want to increment the number in the file. How can I do this?
+I still don't get locking.  I just want to increment the number in the file.  How can I do this?
 
 =item *
 
-All I want to do is append a small amount of text to the end of a file. Do I still have to use locking?
+All I want to do is append a small amount of text to the end of a file.  Do I still have to use locking?
 
 =item *
 
@@ -898,7 +898,7 @@ How can I hope to use regular expressions without creating illegible and unmaint
 
 =item *
 
-I'm having trouble matching over more than one line. What's wrong?
+I'm having trouble matching over more than one line.  What's wrong?
 
 =item *
 
@@ -1075,7 +1075,7 @@ What's the difference between deep and shallow binding?
 
 =item *
 
-Why doesn't "my($foo) = E<lt>FILEE<gt>;" work right?
+Why doesn't "my ($foo) = E<lt>FILEE<gt>;" work right?
 
 =item *
 
@@ -1260,7 +1260,7 @@ Is there a way to hide perl's command line from programs such as "ps"?
 
 =item *
 
-I {changed directory, modified my environment} in a perl script. How come the change disappeared when I exited the script?  How do I get my changes to be visible?
+I {changed directory, modified my environment} in a perl script.  How come the change disappeared when I exited the script?  How do I get my changes to be visible?
 
 =item *
 
@@ -1341,7 +1341,7 @@ What is the correct form of response from a CGI script?
 
 =item *
 
-My CGI script runs from the command line but not the browser. (500 Server Error)
+My CGI script runs from the command line but not the browser.  (500 Server Error)
 
 =item *
 
@@ -1440,3 +1440,5 @@ How do I fetch/put an FTP file?
 How can I do RPC in Perl?
 
 =back
+
+
