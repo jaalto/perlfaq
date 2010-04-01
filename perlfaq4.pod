@@ -1756,7 +1756,7 @@ hash, you can use the C<values> function. As of Perl 5.6
 the values are not copied, so if you modify $orbit (in this
 case), you modify the value.
 
-    for $orbit ( values %orbits ) {
+    for my $orbit ( values %orbits ) {
 	($orbit **= 3) *= (4/3) * 3.14159;
     }
 
