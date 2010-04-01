@@ -1868,7 +1868,7 @@ case-insensitively.
 
 	for (@data) {
 	    ($item) = /\d+\s*(\S+)/;
-	    push @idx, uc($item);
+	    push @idx, uc $item;
 	}
 
 	my @sorted = @data[ sort { $idx[$a] cmp $idx[$b] } 0 .. $#idx ];
