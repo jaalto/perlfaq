@@ -219,7 +219,7 @@ If you have a command-line program that does the job, you can call
 it in backticks to capture whatever it outputs so you can use it
 later:
 
-    $clear_string = `clear`;
+    $clear_string = qx(clear);
 
     print $clear_string;
 
@@ -357,7 +357,7 @@ with this:
 
     sub open_modem {
 	use IPC::Open2;
-	my $stty = `/bin/stty -g`;
+	my $stty = qx(/bin/stty -g);
 
 	open2( \*MODEM_IN, \*MODEM_OUT, "cu -l$modem_device -s2400 2>&1");
 
@@ -370,7 +370,7 @@ with this:
 	chomp;
 
 	if ( !m/^Connected/ ) {
-	    print STDERR "$0: cu printed `$_' instead of `Connected'\n";
+	    print STDERR "$0: cu printed '$_' instead of 'Connected'\n";
 	}
     }
 
@@ -637,14 +637,14 @@ arguments from C<IPC::Open2> (see L<IPC::Open3>).
 
 =head2 Why can't I get the output of a command with system()?
 
-You're confusing the purpose of C<system()> and backticks (``). C<system()>
+You're confusing the purpose of C<system()> and backticks (`` or qx()). C<system()>
 runs a command and returns exit status information (as a 16 bit value:
 the low 7 bits are the signal the process died from, if any, and
-the high 8 bits are the actual exit value). Backticks (``) run a
+the high 8 bits are the actual exit value). Backticks command qx() run a
 command and return what it sent to STDOUT.
 
     $exit_status   = system("mail-users");
-    $output_string = `ls`;
+    $output_string = qx(ls);
 
 =head2 How can I capture STDERR from an external command?
 
