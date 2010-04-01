@@ -670,7 +670,7 @@ which prints its arguments list:
 
     sub foo { print "Args in foo are: @_\n" }
 
-    bar( qw( a b c ) );
+    bar( qw(a b c));
 
 When you call C<bar> with arguments, you see that C<foo> got the same C<@_>:
 
@@ -684,7 +684,7 @@ the example to put parentheses after the call to C<foo> changes the program:
 
     sub foo { print "Args in foo are: @_\n" }
 
-    bar( qw( a b c ) );
+    bar( qw(a b c));
 
 Now the output shows that C<foo> doesn't get the C<@_> from its caller.
 
