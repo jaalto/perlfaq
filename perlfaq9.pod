@@ -204,7 +204,7 @@ examples.
 	    "What's your favorite animal? ",
 	popup_menu(
 	    -name   => 'animal',
-	    -values => [ qw( Llama Alpaca Camel Ram ) ]
+	    -values => [ qw(Llama Alpaca Camel Ram) ]
 	    ),
 	submit,
 
