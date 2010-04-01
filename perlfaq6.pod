@@ -922,29 +922,29 @@ the C<while()> loop starts at the C<a> (where the last match stopped),
 and since it does not use any anchor it can skip over the C<a> to find
 C<44>.
 
-	$_ = "1122a44";
+    $_ = "1122a44";
 
-	while ( m/\G(\d\d)/gc ) {
-	    print "Found $1\n";
-	}
+    while ( m/\G(\d\d)/gc ) {
+	print "Found $1\n";
+    }
 
-	print "Found $1 after while" if m/(\d\d)/g; # finds "44"
+    print "Found $1 after while" if m/(\d\d)/g; # finds "44"
 
 Typically you use the C<\G> anchor with the C<c> flag
 when you want to try a different match if one fails,
 such as in a tokenizer. Jeffrey Friedl offers this example
 which works in 5.004 or later.
 
-	while (<>) {
-	    chomp;
+    while (<>) {
+	chomp;
 
-	    PARSER: {
-		m/ \G( \d+\b    )/gcx   && do { print "number: $1\n";  redo; };
-		m/ \G( \w+      )/gcx   && do { print "word:   $1\n";  redo; };
-		m/ \G( \s+      )/gcx   && do { print "space:  $1\n";  redo; };
-		m/ \G( [^\w\d]+ )/gcx   && do { print "other:  $1\n";  redo; };
-	    }
+	PARSER: {
+	    m/ \G( \d+\b    )/gcx   and   do { print "number: $1\n";  redo; };
+	    m/ \G( \w+      )/gcx   and   do { print "word:   $1\n";  redo; };
+	    m/ \G( \s+      )/gcx   and   do { print "space:  $1\n";  redo; };
+	    m/ \G( [^\w\d]+ )/gcx   and   do { print "other:  $1\n";  redo; };
 	}
+    }
 
 For each line, the C<PARSER> loop first tries to match a series
 of digits followed by a word boundary. This match has to
