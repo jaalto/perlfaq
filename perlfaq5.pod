@@ -949,12 +949,16 @@ they're more realistic.
 Anyway, this is what you can do if you can't help yourself.
 
     use Fcntl qw(:DEFAULT :flock);
+
     sysopen my $fh, "numfile", O_RDWR|O_CREAT or die "can't open numfile: $!";
     flock $fh, LOCK_EX                        or die "can't flock numfile: $!";
+
     my $num = <$fh> || 0;
+
     seek $fh, 0, 0                            or die "can't rewind numfile: $!";
     truncate $fh, 0                           or die "can't truncate numfile: $!";
     (print $fh $num+1, "\n")                  or die "can't write numfile: $!";
+
     close $fh                                 or die "can't close numfile: $!";
 
 Here's a much better web-page hit counter:
