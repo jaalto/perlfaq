@@ -631,9 +631,9 @@ doesn't help you (such as with sort()).
 To enforce scalar context in this particular case, however, you need
 merely omit the parentheses:
 
-    local($foo) = <FILE>;           # WRONG
-    local($foo) = scalar(<FILE>);   # ok
-    local $foo  = <FILE>;           # right
+    local ($foo) = <FILE>;           # WRONG
+    local ($foo) = scalar(<FILE>);   # ok
+    local $foo   = <FILE>;           # right
 
 You should probably be using lexical variables anyway, although the
 issue is the same here:
