@@ -1158,7 +1158,7 @@ You can read the entire filehandle contents into a scalar.
 That temporarily undefs your record separator, and will automatically
 close the file at block exit. If the file is already open, just use this:
 
-    $var = do { local $/; <$fh> };
+    my $content = do { local $/; <$fh> };
 
 For ordinary files you can also use the read function.
 
