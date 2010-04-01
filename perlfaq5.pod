@@ -1064,7 +1064,7 @@ of them.
     }
 
     my $timestamp = shift;
-    my($atime, $mtime) = (stat($timestamp))[8,9];
+    my ($atime, $mtime) = (stat($timestamp))[8,9];
     utime $atime, $mtime, @ARGV;
 
 Error checking is, as usual, left as an exercise for the reader.
@@ -1257,9 +1257,10 @@ It's very system dependent. Here's one solution that works on BSD
 systems:
 
     sub key_ready {
-        my($rin, $nfd);
+        my ($rin, $nfd);
+
         vec($rin, fileno(STDIN), 1) = 1;
-        return $nfd = select($rin,undef,undef,0);
+        return $nfd = select($rin, undef, undef,0);
     }
 
 If you want to find out how many characters are waiting, there's
