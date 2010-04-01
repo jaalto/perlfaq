@@ -512,7 +512,7 @@ give you the same time of day, only the day before.
 You can also use the C<Date::Calc> module using its C<Today_and_Now>
 function.
 
-    use Date::Calc qw( Today_and_Now Add_Delta_DHMS );
+    use Date::Calc qw(Today_and_Now Add_Delta_DHMS);
 
     my @date_time = Add_Delta_DHMS( Today_and_Now(), -1, 0, 0, 0 );
 
@@ -829,7 +829,7 @@ for you.
 	    "Worrying and Love the Bomb";
 
     print $x, "\n";
-    for my $style (qw( sentence title highlight )) {
+    for my $style ( qw(sentence title highlight) ) {
 	print autoformat($x, { case => $style }), "\n";
     }
 
@@ -1226,14 +1226,14 @@ for list operations, so list operations also work on arrays:
     @animals[2,3];
 
     # iteration
-    for ( qw( dog cat bird ) ) { ... }
+    for ( qw(dog cat bird) ) { ... }
     for ( @animals ) { ... }
 
-    my @three = grep { length == 3 } qw( dog cat bird );
+    my @three = grep { length == 3 } qw(dog cat bird);
     my @three = grep { length == 3 } @animals;
 
     # supply an argument list
-    wash_animals( qw( dog cat bird ) );
+    wash_animals( qw(dog cat bird) );
     wash_animals( @animals );
 
 Array operations, which change the scalars, reaaranges them, or adds
@@ -1249,13 +1249,13 @@ An array can also change its length:
 You can change an array element, but you can't change a list element:
 
     $animals[0] = 'Rottweiler';
-    qw( dog cat bird )[0] = 'Rottweiler'; # syntax error!
+    qw(dog cat bird)[0] = 'Rottweiler'; # syntax error!
 
     for ( @animals ) {
 	s/^d/fr/;  # works fine
     }
 
-    for ( qw( dog cat bird ) ) {
+    for ( qw(dog cat bird) ) {
 	s/^d/fr/;  # Error! Modification of read only value!
     }
 
@@ -1648,7 +1648,7 @@ X<cycle> X<modulus>
 If you want to cycle through an array endlessly, you can increment the
 index modulo the number of elements in the array:
 
-	my @array = qw( a b c );
+	my @array = qw(a b c);
 	my $i = 0;
 
 	while ( 1 ) {
@@ -1661,7 +1661,7 @@ next element of the circular array:
 
     use Tie::Cycle;
 
-    tie my $cycle, 'Tie::Cycle', [ qw( FFFFFF 000000 FFFF00 ) ];
+    tie my $cycle, 'Tie::Cycle', [ qw(FFFFFF 000000 FFFF00) ];
 
     print $cycle; # FFFFFF
     print $cycle; # 000000
