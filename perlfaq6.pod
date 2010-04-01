@@ -735,7 +735,7 @@ loop since it has no way to know what $pattern will be.
     my @patterns = qw( foo bar baz );
 
     LINE: while ( <DATA> ) {
-	for $pattern ( @patterns ) {
+	for my $pattern ( @patterns ) {
 	    if ( /\b$pattern\b/i ) {
 		print;
 		next LINE;
