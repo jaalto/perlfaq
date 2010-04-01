@@ -50,13 +50,13 @@ standard output and standard error for instance, you have to unbuffer
 each (although STDERR might be unbuffered by default):
 
     {
-        my $previous_default = select(STDOUT);  # save previous default
+        my $previous_default = select STDOUT;   # save previous default
         $|++;                                   # autoflush STDOUT
 
         select(STDERR);
         $|++;                                   # autoflush STDERR, to be sure
 
-        select($previous_default);              # restore previous default
+        select $previous_default;               # restore previous default
     }
 
     # now should alternate . and +
@@ -1260,7 +1260,7 @@ systems:
         my ($rin, $nfd);
 
         vec($rin, fileno(STDIN), 1) = 1;
-        return $nfd = select($rin, undef, undef,0);
+        return $nfd = select $rin, undef, undef, 0;
     }
 
 If you want to find out how many characters are waiting, there's
