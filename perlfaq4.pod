@@ -1470,9 +1470,11 @@ element is unique in a given array:
     my @union = @intersection = @difference = ();
     my %count;
 
-    for $element ( @array1, @array2 ) { $count{$element}++ }
+    for my $element ( @array1, @array2 ) {
+        $count{$element}++
+    }
 
-    for $element ( keys %count ) {
+    for my $element ( keys %count ) {
 	push @union, $element;
 	push @{ $count{$element} > 1 ? \@intersection : \@difference }, $element;
     }
