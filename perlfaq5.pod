@@ -306,7 +306,7 @@ times the input record separator, C<$/>, shows up:
     open my $fh, '<:raw', $filename   or die "Can't open $filename: $!";
 
     while ( sysread $fh, $buffer, 4096 ) {
-        $lines += ( $buffer =~ s|$/||g; );
+        $lines += ( $buffer =~ s,$/,,g; );
     }
 
     close FILE;
@@ -322,7 +322,7 @@ have an untainted filename though:
     my $lines;
 
     if ( $filename =~ /^([0-9a-z_.]+)\z/ ) {
-        $lines = `/usr/bin/wc -l $1`
+        $lines = qx(/usr/bin/wc -l $1)
         chomp $lines;
     }
 
