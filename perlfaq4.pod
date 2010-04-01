@@ -1900,7 +1900,7 @@ sets C<$vec> to have bit N set only if C<$ints[N]> was set:
 	my $vec;
 
 	for ( 0 .. $#ints ) {
-	    vec($vec,$_,1) = 1 if $ints[$_];
+	    vec($vec, $_, 1) = 1 if $ints[$_];
 	}
 
 The string C<$vec> only takes up as many bits as it needs. For
