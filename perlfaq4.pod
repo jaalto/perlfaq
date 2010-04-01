@@ -1939,7 +1939,7 @@ your C<@ints> array:
 
 	    my $bits = unpack "b*", $vec;
 
-	    push @ints, 0 if $bits =~ s/^(\d)// && $1;
+	    push @ints, 0  if  $bits =~ s/^(\d)// and $1;
 	    push @ints, pos $bits while ($bits =~ /1/g);
 	}
 
