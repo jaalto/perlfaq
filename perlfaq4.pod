@@ -317,7 +317,7 @@ For example:
 To call a function on each element of an array, but ignore the
 results:
 
-    for $iterator ( @array ) {
+    for my $iterator ( @array ) {
 	some_func($iterator);
     }
 
