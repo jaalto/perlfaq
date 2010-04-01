@@ -1124,7 +1124,7 @@ do so one line at a time:
 
     open my $input, '<', $file or die "can't open $file: $!";
 
-    while (<$input>) {
+    while ( <$input> ) {
         chomp;
         # do something with $_
     }
@@ -1147,10 +1147,12 @@ line in the file.
 
 You can read the entire filehandle contents into a scalar.
 
+    my $content;
+
     {
         local $/;
         open my $fh, '<', $file or die "can't open $file: $!";
-        $var = <$fh>;
+        $content = <$fh>;
     }
 
 That temporarily undefs your record separator, and will automatically
@@ -1193,7 +1195,7 @@ turns off echo processing as well.
     use strict;
     $| = 1;
 
-    for (1..4) {
+    for ( 1..4 ) {
         print "gimme: ";
         my $got = getone();
         print "--> $got\n";
