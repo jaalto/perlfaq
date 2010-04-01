@@ -1011,12 +1011,15 @@ like this:
 
     $RECSIZE = 220; # size of record, in bytes
     $recno   = 37;  # which record to update
+
     open my $fh, '+<', 'somewhere' or die "can't update somewhere: $!";
     seek $fh, $recno * $RECSIZE, 0;
     read $fh, $record, $RECSIZE == $RECSIZE or die "can't read record $recno: $!";
+
     # munge the record
     seek $fh, -$RECSIZE, 1;
     print $fh $record;
+
     close $fh;
 
 Locking and error checking are left as an exercise for the reader.
