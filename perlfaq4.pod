@@ -312,7 +312,7 @@ results, use:
 
 For example:
 
-	@triple = map { 3 * $_ } @single;
+    @triple = map { 3 * $_ } @single;
 
 To call a function on each element of an array, but ignore the
 results:
@@ -329,8 +329,9 @@ but you should be aware that the C<..> operator creates an array of
 all integers in the range. This can take a lot of memory for large
 ranges. Instead use:
 
-    @results = ();
-    for ( $i=5; $i < 500_005; $i++ ) {
+    @results;
+
+    for ( $i = 5; $i < 500_005; $i++ ) {
 	push @results, some_func($i);
     }
 
