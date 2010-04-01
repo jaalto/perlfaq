@@ -1428,7 +1428,7 @@ the file, there are a couple of things that you can do.
 Here's a reservoir-sampling algorithm from the Camel Book:
 
     srand;
-    rand $. < 1 && ($line = $_) while <>;
+    rand $. < 1  and  $line = $_ while <>;
 
 This has a significant advantage in space over reading the whole file
 in. You can find a proof of this method in I<The Art of Computer
