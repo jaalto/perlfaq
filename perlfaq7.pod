@@ -638,8 +638,8 @@ merely omit the parentheses:
 You should probably be using lexical variables anyway, although the
 issue is the same here:
 
-    my($foo) = <FILE>;  # WRONG
-    my $foo  = <FILE>;  # right
+    my ($foo) = <FILE>;  # WRONG
+    my $foo   = <FILE>;  # right
 
 =head2 How do I redefine a builtin function, operator, or method?
 
