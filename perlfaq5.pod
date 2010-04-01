@@ -356,13 +356,14 @@ line you want to keep and truncate the file to that point:
             or die "Could not read backwards in [$filename]: $!";
 
     my $lines_from_end = 0;
-    until( $bw->eof or $lines_from_end == $Lines_to_truncate )
+
+    until ( $bw->eof  or  $lines_from_end == $Lines_to_truncate )
     {
         print "Got: ", $bw->readline;
         $lines_from_end++;
     }
 
-    truncate( $filename, $bw->tell );
+    truncate($filename, $bw->tell);
 
 The C<File::ReadBackwards> module also has the advantage of setting
 the input record separator to a regular expression.
