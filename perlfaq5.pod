@@ -385,11 +385,12 @@ behavior within a larger program. For example:
         local($^I, @ARGV) = ('.orig', glob("*.c"));
 
         while ( <> ) {
-            if ($. == 1) {
+            if ( $. == 1 ) {
                 print "This line should appear at the top of each file\n";
             }
 
             s/\b(p)earl\b/${1}erl/i;        # Correct typos, preserving case
+
             print;
             close ARGV if eof;              # Reset $.
         }
