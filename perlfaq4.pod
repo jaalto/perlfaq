@@ -1618,7 +1618,7 @@ You could add to the list this way:
     my ($head, $tail);
     $tail = append($head, 1);       # grow a new head
 
-    for $value ( 2 .. 10 ) {
+    for my $value ( 2 .. 10 ) {
 	$tail = append($tail, $value);
     }
 
