@@ -496,7 +496,7 @@ Berkeley-style ps:
 
     open my $ps, '-|', 'ps';
     print scalar <$ps>;
-    my @fields = qw( pid tt stat time command );
+    my @fields = qw(pid tt stat time command);
 
     while (<$ps>) {
         my %process;
