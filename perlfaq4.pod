@@ -1566,7 +1566,10 @@ same thing. Once you find the element, you stop the loop with last.
     my $found;
 
     for ( @array ) {
-	if ( /Perl/ ) { $found = $_; last }
+	if ( /Perl/ ) {
+            $found = $_;
+            last;
+        }
     }
 
 If you want the array index, you can iterate through the indices
@@ -1577,7 +1580,7 @@ that satisfies the condition.
 
     for ( $i = 0; $i < @array; $i++ ) {
 	if ( $array[$i] =~ /Perl/ ) {
-	     $found = $array[$i];
+	    $found = $array[$i];
 	    $index = $i;
 	    last;
 	}
