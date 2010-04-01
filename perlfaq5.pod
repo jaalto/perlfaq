@@ -383,7 +383,7 @@ behavior within a larger program. For example:
 
     # ...
     {
-        local($^I, @ARGV) = ('.orig', glob("*.c"));
+        local ($^I, @ARGV) = ('.orig', glob("*.c"));
 
         while ( <> ) {
             if ( $. == 1 ) {
