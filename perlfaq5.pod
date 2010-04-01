@@ -462,17 +462,17 @@ temporary files in one process, use a counter:
             local *FH;
             my $count = 0;
 
-            until( defined(fileno(FH)) || $count++ > 100 ) {
+            until ( defined fileno(FH)  and  $count++ > 100 ) {
                 $base_name =~ s/-(\d+)$/"-" . (1 + $1)/e;
                 # O_EXCL is required for security reasons.
                 sysopen my $fh, $base_name, O_WRONLY|O_EXCL|O_CREAT;
             }
 
             if ( defined fileno($fh) ) {
-                return ($fh, $base_name);
+                return $fh, $base_name;
             }
             else {
-                return ();
+                return;
             }
         }
     }
