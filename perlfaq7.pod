@@ -918,13 +918,14 @@ Use this code, provided by Mark-Jason Dominus:
 	    my $pack = shift;
 
 	    die "Shouldn't delete main package"
-		    if $pack eq "" || $pack eq "main";
+		    if $pack eq "" or  $pack eq "main";
 
 	    my $stash = *{$pack . '::'}{HASH};
 	    my $name;
 
-	    for $name ( keys %$stash ) {
+	    for my $name ( keys %$stash ) {
 		my $fullname = $pack . '::' . $name;
+
 		# Get rid of everything with that name.
 		undef $$fullname;
 		undef @$fullname;
