@@ -668,7 +668,7 @@ X<word>
 Use the split function:
 
     while ( <> ) {
-	for $word ( split ) {
+	for my $word ( split ) {
 	    # do something with $word here
 	}
     }
@@ -680,7 +680,7 @@ To work with only alphanumeric sequences (including underscores), you
 might consider
 
     while ( <> ) {
-	for $word ( m/(\w+)/g ) {
+	for my $word ( m/(\w+)/g ) {
 	    # do something with $word here
 	}
     }
