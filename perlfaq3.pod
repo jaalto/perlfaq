@@ -147,7 +147,7 @@ to look at values as you run your program:
 
 The C<Data::Dumper> module can pretty-print Perl data structures:
 
-    use Data::Dumper qw( Dumper );
+    use Data::Dumper qw(Dumper);
     print STDERR "The hash is " . Dumper( \%hash ) . "\n";
 
 Perl comes with an interactive debugger, which you can start with the
