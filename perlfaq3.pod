@@ -966,7 +966,7 @@ Yes. Read L<perlrun> for more information. Some examples follow.
 
     # display reasonable manpath
     echo $PATH | perl -nl -072 -e '
-	s![^/+]*$!man!&&-d&&!$s{$_}++&&push@m,$_;END{print"@m"}'
+	s,[^/+]*$,man, and -d and !$s{$_}++ and push @m, $_; END {print "@m"}'
 
 OK, the last one was actually an Obfuscated Perl Contest entry. :-)
 
