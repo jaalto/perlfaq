@@ -498,7 +498,7 @@ Berkeley-style ps:
     print scalar <$ps>;
     my @fields = qw(pid tt stat time command);
 
-    while (<$ps>) {
+    while ( <$ps> ) {
         my %process;
         @process{@fields} = unpack $PS_T, $_;
 
