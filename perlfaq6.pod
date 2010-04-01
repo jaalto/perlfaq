@@ -709,7 +709,7 @@ regular expression:
 	    $seen{$_}++;
 	}
 
-	while ( my($line, $count) = each %seen ) {
+	while ( my ($line, $count) = each %seen ) {
 	    print "$count $line";
 	}
 
@@ -732,7 +732,7 @@ you want to match it. In this example, perl must recompile
 the regular expression for every iteration of the C<for>
 loop since it has no way to know what $pattern will be.
 
-    my @patterns = qw( foo bar baz );
+    my @patterns = qw(foo bar baz);
 
     LINE: while ( <DATA> ) {
 	for my $pattern ( @patterns ) {
@@ -750,7 +750,7 @@ this example, I inserted a C<map> to turn each pattern into
 its pre-compiled form. The rest of the script is the same,
 but faster.
 
-    my @patterns = map { qr/\b$_\b/i } qw( foo bar baz );
+    my @patterns = map { qr/\b$_\b/i } qw(foo bar baz);
 
     LINE: while ( <> ) {
 	for my $pattern ( @patterns ) {
@@ -765,7 +765,7 @@ In some cases, you may be able to make several patterns into
 a single regular expression. Beware of situations that require
 backtracking though.
 
-    my $regex = join '|', qw( foo bar baz );
+    my $regex = join '|', qw(foo bar baz);
 
     LINE: while ( <> ) {
 	print if /\b(?:$regex)\b/i;
@@ -883,7 +883,7 @@ to stop at C<a>. Simply matching pairs of digits skips over
 the C<a> and still matches C<44>.
 
     $_ = "1122a44";
-    my @pairs = m/(\d\d)/g;   # qw( 11 22 44 )
+    my @pairs = m/(\d\d)/g;   # qw(11 22 44)
 
 If you use the C<\G> anchor, you force the match after C<22> to
 start with the C<a>. The regular expression cannot match
@@ -892,7 +892,7 @@ fails and the match operator returns the pairs it already
 found.
 
     $_ = "1122a44";
-    my @pairs = m/\G(\d\d)/g; # qw( 11 22 )
+    my @pairs = m/\G(\d\d)/g; # qw(11 22)
 
 You can also use the C<\G> anchor in scalar context. You
 still need the C<g> flag.
